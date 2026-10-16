@@ -1,6 +1,6 @@
 (function () {
   // ===== CONFIGURAÇÃO =====
-  var SEM_HTML = false; // true = links sem ".html" (veja as notas abaixo)
+  var SEM_HTML = true; // true = links sem ".html" (veja as notas abaixo)
   var BASE = "./";      // todas as páginas na mesma pasta
 
   // Nomes dos seus arquivos (sem .html). Troque se forem diferentes.
