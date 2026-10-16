@@ -44,5 +44,44 @@ const Auth = {
   // Sem conta/sessão -> manda pro index.html
   requireLogin(destino = "index.html") {
     if (!this.currentUser()) location.replace(destino);
+  },
+
+  // ---------- Amigos (por conta) ----------
+  _friendsKey() {
+    const me = this.currentUser();
+    return me ? "oldrblx_friends_" + me.toLowerCase() : null;
+  },
+
+  // Lista de nomes dos amigos da conta logada
+  getFriends() {
+    const key = this._friendsKey();
+    if (!key) return [];
+    try { return JSON.parse(localStorage.getItem(key) || "[]"); } catch (e) { return []; }
+  },
+
+  addFriend(username) {
+    const key = this._friendsKey();
+    if (!key) return { ok: false, msg: "Faça login primeiro." };
+    username = (username || "").trim();
+    if (!username) return { ok: false, msg: "Digite um usuário." };
+    if (username.toLowerCase() === this.currentUser().toLowerCase()) {
+      return { ok: false, msg: "Você não pode adicionar a si mesmo." };
+    }
+    const alvo = this.getUsers()[username.toLowerCase()];
+    if (!alvo) return { ok: false, msg: "Esse usuário não existe." };
+    const lista = this.getFriends();
+    if (lista.some(n => n.toLowerCase() === alvo.name.toLowerCase())) {
+      return { ok: false, msg: "Vocês já são amigos." };
+    }
+    lista.push(alvo.name);
+    localStorage.setItem(key, JSON.stringify(lista));
+    return { ok: true, name: alvo.name };
+  },
+
+  removeFriend(username) {
+    const key = this._friendsKey();
+    if (!key) return;
+    const lista = this.getFriends().filter(n => n.toLowerCase() !== username.toLowerCase());
+    localStorage.setItem(key, JSON.stringify(lista));
   }
 };
