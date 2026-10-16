@@ -1,0 +1,69 @@
+(function () {
+  // ===== CONFIGURAÇÃO =====
+  var SEM_HTML = false; // true = links sem ".html" (veja as notas abaixo)
+  var BASE = "./";      // todas as páginas na mesma pasta
+
+  // Nomes dos seus arquivos (sem .html). Troque se forem diferentes.
+  var ROTAS = [
+    { re: /^\/(home)?\/?$/,                    vai: "home" },       // logo / Home
+    { re: /^\/catalog/,                        vai: "catalog" },    // Catalog
+    { re: /^\/upgrades\/robux/,                vai: "promocodes" }, // ROBUX / Buy Robux
+    { re: /^\/promocodes/,                     vai: "promocodes" },
+    { re: /^\/(games|develop)/,                vai: "home" },       // ainda sem página própria
+    { re: /^\/(newlogin|login|account\/signupredir)/, vai: "index" }
+  ];
+  // =========================
+
+  function destino(nome) {
+    if (nome === "index") return BASE + (SEM_HTML ? "" : "index.html");
+    return BASE + nome + (SEM_HTML ? "" : ".html");
+  }
+
+  // undefined = link normal (não mexe) | null = link externo sem rota (bloqueia) | string = rota
+  function resolver(href) {
+    if (!href) return undefined;
+    var h = href.replace(/^(https?:\/\/web\.archive\.org)?\/web\/\d+[a-z_]*\//, "");
+    var m = h.match(/^(?:https?:)?\/\/([^\/?#]+)(\/[^?#]*)?/);
+    if (!m) return undefined;                          // "#", "pagina.html", javascript:...
+    if (!/roblox|archive\.org/i.test(m[1])) return undefined;
+    var caminho = (m[2] || "/").toLowerCase();
+    for (var i = 0; i < ROTAS.length; i++) {
+      if (ROTAS[i].re.test(caminho)) return destino(ROTAS[i].vai);
+    }
+    return null;
+  }
+
+  // Reescreve os links (assim o endereço certo aparece ao passar o mouse)
+  function reescrever() {
+    var links = document.querySelectorAll("a[href]");
+    for (var i = 0; i < links.length; i++) {
+      var d = resolver(links[i].getAttribute("href"));
+      if (typeof d === "string") {
+        links[i].setAttribute("href", d);
+        links[i].removeAttribute("target");
+      }
+    }
+  }
+
+  // Garante o redirecionamento mesmo se algum script da Roblox mexer nos links
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest("a[href]") : null;
+    if (!a) return;
+    var d = resolver(a.getAttribute("href"));
+    if (d === undefined) return;
+    e.preventDefault();
+    e.stopPropagation();
+    if (d) location.href = d; // null = não sai pro site da Roblox
+  }, true);
+
+  document.addEventListener("DOMContentLoaded", reescrever);
+  window.addEventListener("load", reescrever);
+
+  // Esconde o ".html" na barra de endereço (só se SEM_HTML = true e estiver em http/https)
+  if (SEM_HTML && /^https?:$/.test(location.protocol)) {
+    var limpo = location.pathname.replace(/index\.html$/, "").replace(/\.html$/, "");
+    if (limpo !== location.pathname) {
+      history.replaceState(null, "", limpo + location.search + location.hash);
+    }
+  }
+})();
