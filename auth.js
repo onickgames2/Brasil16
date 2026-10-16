@@ -1,14 +1,33 @@
 const Auth = {
   KEY_USERS: "oldrblx_users",
   KEY_SESSION: "oldrblx_session",
+  KEY_NEXT_ID: "oldrblx_next_id",
 
   async hash(texto) {
     const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(texto));
     return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
   },
 
+  // Lê as contas e, se alguma ainda não tem id (contas antigas), atribui em sequência
   getUsers() {
-    return JSON.parse(localStorage.getItem(this.KEY_USERS) || "{}");
+    const users = JSON.parse(localStorage.getItem(this.KEY_USERS) || "{}");
+    let next = parseInt(localStorage.getItem(this.KEY_NEXT_ID) || "1", 10);
+    let mudou = false;
+
+    // garante que o contador nunca fique abaixo de um id já existente
+    Object.values(users).forEach(u => {
+      if (u.id && u.id >= next) { next = u.id + 1; mudou = true; }
+    });
+    // contas antigas sem id
+    Object.values(users).forEach(u => {
+      if (!u.id) { u.id = next++; mudou = true; }
+    });
+
+    if (mudou) {
+      localStorage.setItem(this.KEY_USERS, JSON.stringify(users));
+      localStorage.setItem(this.KEY_NEXT_ID, String(next));
+    }
+    return users;
   },
 
   async register(username, password) {
@@ -17,10 +36,15 @@ const Auth = {
     if (password.length < 4) return { ok: false, msg: "Senha muito curta (mín. 4)." };
     const users = this.getUsers();
     if (users[username.toLowerCase()]) return { ok: false, msg: "Esse usuário já existe." };
-    users[username.toLowerCase()] = { name: username, pass: await this.hash(password) };
+
+    // gera o próximo id (primeira conta = 1)
+    const id = parseInt(localStorage.getItem(this.KEY_NEXT_ID) || "1", 10);
+    localStorage.setItem(this.KEY_NEXT_ID, String(id + 1));
+
+    users[username.toLowerCase()] = { id: id, name: username, pass: await this.hash(password) };
     localStorage.setItem(this.KEY_USERS, JSON.stringify(users));
     localStorage.setItem(this.KEY_SESSION, username);
-    return { ok: true };
+    return { ok: true, id: id };
   },
 
   async login(username, password) {
@@ -34,6 +58,17 @@ const Auth = {
 
   currentUser() {
     return localStorage.getItem(this.KEY_SESSION);
+  },
+
+  // Id da conta logada (ou de qualquer usuário pelo nome)
+  getId(username) {
+    const u = this.getUsers()[(username || "").trim().toLowerCase()];
+    return u ? u.id : null;
+  },
+
+  currentId() {
+    const me = this.currentUser();
+    return me ? this.getId(me) : null;
   },
 
   logout() {
