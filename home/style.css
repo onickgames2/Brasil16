@@ -1,0 +1,183 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  font-size: 12px;
+  color: #333;
+}
+
+/* Sidebars */
+#left-sidebar, #right-sidebar {
+  position: fixed;
+  top: 0;
+  width: 180px;
+  height: 100%;
+  background-color: #d9d9d9;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 11px;
+}
+
+#left-sidebar {
+  left: 0;
+  border-right: 1px solid #bbb;
+}
+
+#right-sidebar {
+  right: 0;
+  border-left: 1px solid #bbb;
+}
+
+.comic-strip p {
+  margin: 0 0 8px;
+}
+
+/* Top Bar */
+#top-bar {
+  position: fixed;
+  top: 0;
+  left: 180px;
+  right: 180px;
+  height: 40px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+}
+
+#logo {
+  height: 24px;
+  margin-right: 20px;
+}
+
+nav a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #0078d7;
+  font-size: 12px;
+}
+
+.counter {
+  background-color: #d9534f;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+  margin-left: 4px;
+}
+
+/* Main Content */
+#main-content {
+  margin: 60px 200px;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+/* Friends */
+.friend-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.friend {
+  width: 80px;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.friend img {
+  width: 60px;
+  height: 60px;
+  border: 1px solid #999;
+  margin-bottom: 5px;
+}
+
+.friend span {
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Games */
+.game-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.game-card {
+  width: 150px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+  text-align: center;
+}
+
+.game-card img {
+  width: 100%;
+  border: 1px solid #999;
+  margin-bottom: 5px;
+}
+
+.game-card p {
+  font-size: 12px;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.game-card span {
+  font-size: 11px;
+  color: #666;
+}
+/* Roblox 2017 Top Bar */
+#roblox-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background-color: #0078d7;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 10000;
+  font-size: 12px;
+}
+
+#topbar-logo {
+  height: 24px;
+  margin-right: 20px;
+}
+
+#roblox-topbar nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+#topbar-search {
+  margin-left: auto;
+  padding: 4px 8px;
+  font-size: 11px;
+  border: none;
+  border-radius: 2px;
+}
