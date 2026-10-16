@@ -1,22 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <title>Old Roblox (2017)</title>
-    <link rel="stylesheet" href="./style.css">
-
-  </head>
-    
-  <body>
-  <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>SupercreatoR78 - ROBLOX</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ROBLOX</title>
+  <link rel="stylesheet" href="./style.css">
+  <!-- Verifica a conta ANTES de carregar a página -->
+  <script src="./auth.js"></script>
+  <script>Auth.requireLogin("index.html");</script>
 </head>
 <body>
+
+  <!-- Topbar azul -->
+  <div id="roblox-topbar">
+    <img src="images/roblox-logo-white.png" alt="ROBLOX" id="topbar-logo">
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Games</a>
+      <a href="#">Catalog</a>
+      <a href="#">Develop</a>
+      <a href="#">Forum</a>
+    </nav>
+    <div id="topbar-search-container">
+      <input type="text" placeholder="Search" id="topbar-search">
+    </div>
+  </div>
 
   <!-- Left Sidebar -->
   <aside id="left-sidebar">
@@ -44,22 +52,21 @@
       <a href="#">Messages <span class="counter" id="msg-count">3</span></a>
       <a href="#">Friends <span class="counter" id="friend-count">199</span></a>
       <a href="#">Settings</a>
+      <a href="#" id="logout">Sair</a>
     </nav>
   </header>
 
   <!-- Main Content -->
   <main id="main-content">
-    <h1>Hello, SupercreatoR78!</h1>
+    <h1 id="hello">Hello!</h1>
 
     <section>
       <h2>Friends (199)</h2>
       <div class="friend-grid">
-        <!-- Repeat for each friend -->
         <div class="friend">
           <img src="images/avatar1.png" alt="Invinciblecl...">
           <span>Invinciblecl...</span>
         </div>
-        <!-- Add more friends here -->
       </div>
     </section>
 
@@ -73,40 +80,15 @@
             <span>10,467 Playing</span>
           </a>
         </div>
-        <!-- Add more games here -->
       </div>
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <script src="./script.js"></script>
+  <script>
+    // Mostra o nome da conta logada
+    document.getElementById("hello").textContent = "Hello, " + Auth.currentUser() + "!";
+    document.getElementById("logout").onclick = (e) => { e.preventDefault(); Auth.logout(); };
+  </script>
 </body>
-</html>
-<div id="roblox-topbar">
-  <img src="images/roblox-logo-white.png" alt="ROBLOX" id="topbar-logo">
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Games</a>
-    <a href="#">Catalog</a>
-    <a href="#">Develop</a>
-    <a href="#">Forum</a>
-  </nav>
-  <input type="text" placeholder="Search" id="topbar-search">
-</div>
-<div id="roblox-topbar">
-  <img src="images/roblox-logo-white.png" alt="ROBLOX" id="topbar-logo">
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Games</a>
-    <a href="#">Catalog</a>
-    <a href="#">Develop</a>
-    <a href="#">Forum</a>
-  </nav>
-  <div id="topbar-search-container">
-    <input type="text" placeholder="Search" id="topbar-search">
-  </div>
-</div>
-    <script  src="./script.js"></script>
-
-  </body>
-  
 </html>
