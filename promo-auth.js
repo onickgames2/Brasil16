@@ -13,6 +13,7 @@
   // 2) Lista de promocodes (pra criar outro, é só adicionar aqui)
   var CODES = {
     "BEMVINDO": { robux: 200 }
+    "ALARMEFALSO": { robux: 650 }
   };
 
   function getRobux() {
