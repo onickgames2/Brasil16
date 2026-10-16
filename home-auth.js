@@ -10,6 +10,11 @@
 
   // Troca "ConnerMurphy07" pelo nome da conta logada
   function aplicarNome() {
+    var robux = parseInt(localStorage.getItem("oldrblx_robux_" + nome.toLowerCase()) || "0", 10);
+    var a = document.getElementById("nav-robux-amount");
+    var b = document.getElementById("nav-robux-balance");
+    if (a) a.textContent = robux;
+    if (b) b.textContent = robux + " ROBUX";
     var ola = document.querySelector(".home-header-content h1 a");
     if (ola) ola.textContent = "Hello, " + nome + "!";
 
