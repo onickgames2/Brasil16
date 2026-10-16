@@ -16,7 +16,28 @@
     "@keyframes rbxpulse{from{opacity:.4}to{opacity:1}}";
   document.head.appendChild(estilo);
 
-  // ---------- Nome / Robux ----------
+  // ---------- Personagem noob (SVG) ----------
+  function noobAvatar() {
+    var svg =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 90 90">' +
+      '<rect width="90" height="90" fill="#e8eef5"/>' +
+      // braços
+      '<rect x="8" y="48" width="16" height="42" fill="#f5cd30"/>' +
+      '<rect x="66" y="48" width="16" height="42" fill="#f5cd30"/>' +
+      // torso
+      '<rect x="24" y="48" width="42" height="42" fill="#0d69ac"/>' +
+      // cabeça
+      '<rect x="30" y="12" width="30" height="36" rx="6" fill="#f5cd30"/>' +
+      // olhos
+      '<circle cx="39" cy="27" r="2.5" fill="#000"/>' +
+      '<circle cx="51" cy="27" r="2.5" fill="#000"/>' +
+      // sorriso
+      '<path d="M37 35 Q45 43 53 35" stroke="#000" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+      '</svg>';
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  // ---------- Nome / Robux / Avatar ----------
   function aplicarNome() {
     var robux = parseInt(localStorage.getItem("oldrblx_robux_" + nome.toLowerCase()) || "0", 10);
     var a = document.getElementById("nav-robux-amount");
@@ -29,6 +50,9 @@
 
     var lateral = document.querySelector(".rbx-lead a");
     if (lateral) lateral.textContent = nome;
+
+    var bust = document.querySelector(".home-thumbnail-bust img");
+    if (bust) bust.src = noobAvatar();
   }
 
   // Preenche o Hello assim que o elemento aparece no DOM (antes do load)
@@ -41,15 +65,6 @@
   obs.observe(document.documentElement, { childList: true, subtree: true });
 
   // ---------- Amigos ----------
-  function avatarPadrao(n) {
-    var inicial = (n.charAt(0) || "?").toUpperCase();
-    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90">' +
-      '<rect width="90" height="90" fill="#c8c8c8"/>' +
-      '<text x="45" y="58" font-size="40" font-family="Arial" text-anchor="middle" fill="#fff">' +
-      inicial + '</text></svg>';
-    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
-  }
-
   function renderAmigos() {
     var ul = document.getElementById("friend-list");
     var cont = document.getElementById("friends-count");
@@ -70,7 +85,7 @@
       av.className = "friend-avatar";
       var img = document.createElement("img");
       img.alt = n;
-      img.src = avatarPadrao(n);
+      img.src = noobAvatar();
       av.appendChild(img);
 
       var nm = document.createElement("span");
