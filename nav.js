@@ -1,6 +1,6 @@
 (function () {
   // ===== CONFIGURAÇÃO =====
-  var SEM_HTML = false; // true = links sem ".html"
+  var SEM_HTML = true; // true = links sem ".html"
   var BASE = "./";      // todas as páginas na mesma pasta
 
   var ROTAS = [
