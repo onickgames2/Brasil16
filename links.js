@@ -7,7 +7,7 @@
     develop: "develop.html",
     login: "login.html",
     signup: "index.html",
-    robux: "promocodes.html,
+    robux: "promocodes.html",
     profile: null,
     messages: null,
     friends: null,
