@@ -1643,6 +1643,17 @@ Roblox.Endpoints.Urls = Roblox.Endpoints.Urls || {};
 })();
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.voting-container').forEach(function (bar) {
+        var up = parseInt(bar.getAttribute('data-upvotes'), 10) || 0;
+        var down = parseInt(bar.getAttribute('data-downvotes'), 10) || 0;
+        var votes = bar.querySelector('.votes');
+        if (votes && up + down > 0) votes.style.width = Math.round(up / (up + down) * 100) + '%';
+    });
+});
+</script>
+
 <div id="usernotifications-data-model"
      class="hidden"
      data-notificationsdomain="https://notifications.roblox.com/"
@@ -1907,14 +1918,4 @@ Roblox.Endpoints.Urls = Roblox.Endpoints.Urls || {};
                     <li class="rbx-font-sm group-select-friend"
                         ng-repeat="userId in dialogData.selectedUserIds">
                         {{dialogData.selectedUsersDict[userId].Username}}
-                        <span class="rbx-icon-chat-cancel-search group-select-cancel" ng-click="selectFriends(userId)"></span>
-                    </li>
-                </ul>
-                <input type="text"
-                       placeholder="Search"
-                       class="chat-search-input"
-                       focus-me="chatLibrary.inApp ? false: true"
-                       ng-model="dialogData.searchTerm" />
-            </div>
-            <button id="friends-selection-btn"
-                    class="rbx-btn-secondary-xs f
+                        <span class="rbx-icon-chat-cancel-search group-select-cancel
