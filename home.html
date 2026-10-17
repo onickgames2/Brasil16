@@ -1553,6 +1553,85 @@ Roblox.Endpoints.Urls = Roblox.Endpoints.Urls || {};
 
 
 
+<!-- TOPBAR: hamburguer, popovers (settings/tix/robux) e busca mobile -->
+<script>
+(function () {
+    function ready(fn) {
+        if (document.readyState !== 'loading') fn();
+        else document.addEventListener('DOMContentLoaded', fn);
+    }
+
+    ready(function () {
+        var nav = document.getElementById('navigation');
+        var burger = document.querySelector('[data-behavior="nav-notification"]');
+        var searchBox = document.getElementById('navbar-universal-search');
+        var searchToggle = document.querySelector('[data-toggle="toggle-search"]');
+        var triggers = document.querySelectorAll('#header a[data-toggle="popover"]');
+
+        function closePopovers(except) {
+            document.querySelectorAll('#header .rbx-popover-content').forEach(function (p) {
+                if (p !== except) p.style.display = 'none';
+            });
+        }
+
+        // Hamburguer: abre/fecha o menu da esquerda
+        if (burger && nav) {
+            burger.style.cursor = 'pointer';
+            burger.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var hidden = window.getComputedStyle(nav).display === 'none';
+                if (hidden) {
+                    nav.style.display = 'block';
+                    nav.style.zIndex = '1050';
+                    document.body.classList.add('nav-open');
+                } else {
+                    nav.style.display = 'none';
+                    document.body.classList.remove('nav-open');
+                }
+            });
+        }
+
+        // Icones de settings / tix / robux: abrem o popover
+        triggers.forEach(function (trigger) {
+            var key = trigger.getAttribute('data-bind');
+            var content = document.querySelector('#header .rbx-popover-content[data-toggle="' + key + '"]');
+            if (!content) return;
+
+            trigger.style.cursor = 'pointer';
+            trigger.parentNode.style.position = 'relative';
+            content.style.position = 'absolute';
+            content.style.top = '100%';
+            content.style.right = '0';
+            content.style.zIndex = '1100';
+            content.style.display = 'none';
+
+            trigger.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var open = content.style.display === 'block';
+                closePopovers();
+                content.style.display = open ? 'none' : 'block';
+            });
+            content.addEventListener('click', function (e) { e.stopPropagation(); });
+        });
+
+        // Lupa (mobile): mostra/esconde a barra de busca
+        if (searchToggle && searchBox) {
+            searchToggle.style.cursor = 'pointer';
+            searchToggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var hidden = window.getComputedStyle(searchBox).display === 'none';
+                searchBox.style.display = hidden ? 'block' : 'none';
+            });
+        }
+
+        // Clicar fora fecha os popovers
+        document.addEventListener('click', function () { closePopovers(); });
+    });
+})();
+</script>
+
 <div id="usernotifications-data-model"
      class="hidden"
      data-notificationsdomain="https://notifications.roblox.com/"
@@ -1836,59 +1915,4 @@ Roblox.Endpoints.Urls = Roblox.Endpoints.Urls || {};
 
         <div id="scrollbar_friend_{{dialogData.dialogType}}_{{dialogData.layoutId}}" class="rbx-scrollbar chat-friend-list"
              friends-lazy-load>
-            <ul class="chat-friends">
-                <li ng-repeat="friend in chatLibrary.friendsDict | orderList: dialogData.friendIds  | filter: {Username: dialogData.searchTerm}"
-                    class="chat-friend">
-                    <div class="chat-friend-container chat-friend-select"
-                         ng-click="selectFriends(friend.Id)">
-                        <div class="chat-friend-avatar">
-                            <img ng-src="{{friend.AvatarThumb.Url}}"
-                                 thumbnail="friend.AvatarThumb"
-                                 image-retry
-                                 class="chat-avatar">
-                            <div class="chat-friend-status" ng-class="userPresenceTypes[friend.UserPresenceType]['className']"></div>
-                        </div>
-                        <div class="chat-friend-info">
-                            <span class="chat-friend-name">{{friend.Username}}</span>
-                            <span class="rbx-font-sm chat-friend-message">{{userPresenceTypes[friend.UserPresenceType].title}}</span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</script>
-        <script type="text/ng-template" id="chat-dialog">
-    <div id="dialog-container" class="dialog-container"
-         ng-class="{'group-has-banner': dialogData.isPartyExisted || dialogData.partyInGame,
-                    'dialog-party': dialogData.dialogType == dialogType.PARTY,
-                    'collapsed': dialogLayout.collapsed && chatLibrary.deviceType === deviceType.COMPUTER,
-                    'active': dialogLayout.active && !dialogLayout.hasFocus}"
-         ng-controller="dialogController"
-         ng-focus="focusDialog()">
-        <div class="dialog-main">
-            <div class="chat-windows-header dialog-header">
-                <div class="chat-header-label">
-                    <span class="rbx-icon-chat-party-label"
-                          ng-show="dialogData.dialogType == dialogType.PARTY"
-                          title="Party"
-                          ng-cloak></span>
-                    <span id="chat-title"
-                          class="rbx-font-bold chat-header-title dialog-header-title" 
-                          ng-click="toggleDialogContainer()" 
-                          ng-if="dialogData.dialogType != dialogType.PARTY">
-                        <a class="rbx-font-bold"
-                           ng-click="linkToProfile($event)"
-                           ng-href="{{dialogData.nameLink}}">{{dialogData.name}}</a>
-                    </span>
-                    <span id="party-title"
-                          class="rbx-font-bold chat-header-title dialog-header-title"
-                          ng-click="toggleDialogContainer()" 
-                          ng-if="dialogData.dialogType == dialogType.PARTY">{{dialogData.name}}
-                    </span>
-                </div>
-                <div class="chat-header-action"
-                     chat-setting>
-                    <span class="rbx-icon-chat-close"
-                          ng-click="closeDialog(dialogData.layoutId)"
-                          data-toggle="toolt
+           
