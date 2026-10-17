@@ -16,37 +16,6 @@
     "FDOMINIOANTIGO": { robux: 380 }
   };
 
-  // Funções de banco de dados utilizando o Supabase client
-  async function getRobux() {
-    try {
-      // Certifique-se de que 'supabase' está carregado globalmente (via supabase-client.js)
-      var { data, error } = await supabase
-        .from('usuarios') // Nome da sua tabela de contas no Supabase
-        .select('robux')
-        .eq('username', user)
-        .single();
-
-      if (error || !data) return 0;
-      return parseInt(data.robux || "0", 10);
-    } catch (e) {
-      console.error("Erro ao buscar robux:", e);
-      return 0;
-    }
-  }
-
-  async function setRobux(n) {
-    try {
-      var { error } = await supabase
-        .from('usuarios')
-        .update({ robux: n })
-        .eq('username', user);
-
-      if (error) console.error("Erro ao atualizar robux:", error);
-    } catch (e) {
-      console.error("Erro ao atualizar robux:", e);
-    }
-  }
-
   function getUsed() {
     try { return JSON.parse(localStorage.getItem(KEY_USED) || "[]"); }
     catch (e) { return []; }
@@ -77,13 +46,14 @@
     $("error").style.display = "block";
   }
 
-  // Atualiza o topo buscando direto do servidor
+  // Atualiza o topo usando o Auth do servidor/supabase
   async function atualizarTopo() {
     var login = $("head-login");
     var signup = document.querySelector(".rbx-navbar-signup");
     if (login) login.textContent = user;
     if (signup) {
-      var saldo = await getRobux();
+      // Pega o saldo diretamente através do auth.js conectado ao Supabase
+      var saldo = typeof Auth.getRobux === "function" ? await Auth.getRobux(user) : 0;
       signup.textContent = "R$ " + saldo;
       signup.removeAttribute("href");
     }
@@ -109,10 +79,13 @@
         return mostrarErro("Você já resgatou este código.");
       }
 
-      var saldoAtual = await getRobux();
+      var saldoAtual = typeof Auth.getRobux === "function" ? await Auth.getRobux(user) : 0;
       var novoSaldo = saldoAtual + promo.robux;
 
-      await setRobux(novoSaldo);
+      if (typeof Auth.setRobux === "function") {
+        await Auth.setRobux(user, novoSaldo);
+      }
+      
       markUsed(code);
       await atualizarTopo();
       
