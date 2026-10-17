@@ -34,7 +34,10 @@ const Auth = {
       const nome = meta.username;
       if (nome) {
         const { error } = await sb.from("profiles").insert({ id: uid, username: nome });
-        if (error) console.error("Erro ao criar perfil:", error);
+if (error) {
+  console.error("Erro ao criar perfil:", error);
+  this._ultimoErro = error.message;
+}
         perfil = await this._buscarPerfil(uid);
       }
     }
@@ -73,7 +76,7 @@ const Auth = {
 
     await this._carregarPerfil(data.session);
     if (!this._profile) {
-      return { ok: false, msg: "Conta criada, mas o perfil não foi gerado. Veja o console (F12) e o SQL do Supabase." };
+      return { ok: false, msg: "Perfil não gerado: " + (this._ultimoErro || "sem erro (confira a tabela profiles)") };
     }
     return { ok: true, id: this._profile.numeric_id };
   },
