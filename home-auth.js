@@ -1,142 +1,100 @@
 (function () {
-  // Sem conta logada: esconde a página e volta pro index.html
-  if (!Auth.currentUser()) {
-    document.documentElement.style.display = "none";
-    Auth.requireLogin("index.html");
-    return;
-  }
+  var $ = function (id) { return document.getElementById(id); };
 
-  var nome = Auth.currentUser();
+  // esconde a página até confirmar o login
+  document.documentElement.style.visibility = "hidden";
 
-  // ---------- Pre-load: skeleton cinza enquanto o nome não entra ----------
-  var estilo = document.createElement("style");
-  estilo.textContent =
-    ".rbx-preload{display:inline-block;min-width:130px;height:.9em;vertical-align:middle;" +
-    "background:#e3e3e3;border-radius:3px;color:transparent;animation:rbxpulse 1s infinite alternate}" +
-    "@keyframes rbxpulse{from{opacity:.4}to{opacity:1}}";
-  document.head.appendChild(estilo);
+  async function renderFriends() {
+    var lista = await Auth.getFriends();
+    $("friends-count").textContent = lista.length;
 
-  // ---------- Personagem noob (SVG) ----------
-  function noobAvatar() {
-    var svg =
-      '<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 90 90">' +
-      '<rect width="90" height="90" fill="#e8eef5"/>' +
-      // braços
-      '<rect x="8" y="48" width="16" height="42" fill="#f5cd30"/>' +
-      '<rect x="66" y="48" width="16" height="42" fill="#f5cd30"/>' +
-      // torso
-      '<rect x="24" y="48" width="42" height="42" fill="#0d69ac"/>' +
-      // cabeça
-      '<rect x="30" y="12" width="30" height="36" rx="6" fill="#f5cd30"/>' +
-      // olhos
-      '<circle cx="39" cy="27" r="2.5" fill="#000"/>' +
-      '<circle cx="51" cy="27" r="2.5" fill="#000"/>' +
-      // sorriso
-      '<path d="M37 35 Q45 43 53 35" stroke="#000" stroke-width="2" fill="none" stroke-linecap="round"/>' +
-      '</svg>';
-    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
-  }
-
-  // ---------- Nome / Robux / Avatar ----------
-  function aplicarNome() {
-    var robux = parseInt(localStorage.getItem("oldrblx_robux_" + nome.toLowerCase()) || "0", 10);
-    var a = document.getElementById("nav-robux-amount");
-    var b = document.getElementById("nav-robux-balance");
-    if (a) a.textContent = robux;
-    if (b) b.textContent = robux + " ROBUX";
-
-    var ola = document.querySelector(".home-header-content h1 a");
-    if (ola) ola.textContent = "Hello, " + nome + "!";
-
-    var lateral = document.querySelector(".rbx-lead a");
-    if (lateral) lateral.textContent = nome;
-
-    var bust = document.querySelector(".home-thumbnail-bust img");
-    if (bust) bust.src = noobAvatar();
-  }
-
-  // Preenche o Hello assim que o elemento aparece no DOM (antes do load)
-  var obs = new MutationObserver(function () {
-    if (document.querySelector(".home-header-content h1 a")) {
-      aplicarNome();
-      obs.disconnect();
-    }
-  });
-  obs.observe(document.documentElement, { childList: true, subtree: true });
-
-  // ---------- Amigos ----------
-  function renderAmigos() {
-    var ul = document.getElementById("friend-list");
-    var cont = document.getElementById("friends-count");
-    if (!ul) return;
-    var lista = Auth.getFriends();
-    if (cont) cont.textContent = lista.length;
+    var ul = $("friend-list");
     ul.innerHTML = "";
-    lista.forEach(function (n) {
+
+    if (!lista.length) {
+      var vazio = document.createElement("li");
+      vazio.id = "friend-empty";
+      vazio.textContent = "Você ainda não tem amigos. Adicione alguém pelo nome de usuário.";
+      ul.appendChild(vazio);
+      return;
+    }
+
+    lista.forEach(function (nome) {
       var li = document.createElement("li");
       li.className = "list-item friend";
 
-      var link = document.createElement("a");
-      link.href = "#";
-      link.className = "friend-link";
-      link.title = n;
+      var a = document.createElement("a");
+      a.className = "friend-link";
+      a.href = "#";
+      a.title = nome;
+      a.addEventListener("click", function (e) { e.preventDefault(); });
 
       var av = document.createElement("span");
       av.className = "friend-avatar";
-      var img = document.createElement("img");
-      img.alt = n;
-      img.src = noobAvatar();
-      av.appendChild(img);
+      av.textContent = nome.charAt(0).toUpperCase();
 
       var nm = document.createElement("span");
       nm.className = "friend-name rbx-text-overflow";
-      nm.textContent = n;
+      nm.textContent = nome;
 
-      link.appendChild(av);
-      link.appendChild(nm);
-      li.appendChild(link);
+      a.appendChild(av);
+      a.appendChild(nm);
+
+      var x = document.createElement("span");
+      x.className = "friend-remove";
+      x.title = "Remover amigo";
+      x.textContent = "×";
+      x.addEventListener("click", async function () {
+        await Auth.removeFriend(nome);
+        renderFriends();
+      });
+
+      li.appendChild(a);
+      li.appendChild(x);
       ul.appendChild(li);
     });
   }
 
-  function iniciarAmigos() {
-    renderAmigos();
-    var form = document.getElementById("add-friend-form");
-    var input = document.getElementById("add-friend-input");
-    var msg = document.getElementById("add-friend-msg");
-    if (!form || !input) return;
-    form.addEventListener("submit", function (e) {
+  async function iniciar() {
+    await Auth.requireLogin();
+    var nome = Auth.currentUser();
+    if (!nome) return; // requireLogin já redirecionou
+
+    // nome no "Hello, ...!" e no menu da esquerda
+    var hello = $("home-username");
+    if (hello) { hello.textContent = nome; hello.classList.remove("rbx-preload"); }
+    var lead = document.querySelector(".rbx-left-col .rbx-lead a");
+    if (lead) { lead.textContent = nome; lead.setAttribute("href", "#"); }
+
+    // adicionar amigo
+    var form = $("add-friend-form");
+    var input = $("add-friend-input");
+    var msg = $("add-friend-msg");
+    form.addEventListener("submit", async function (e) {
       e.preventDefault();
-      var r = Auth.addFriend(input.value);
+      msg.textContent = "";
+      var r = await Auth.addFriend(input.value);
       if (r.ok) {
         input.value = "";
-        msg.textContent = "";
-        renderAmigos();
+        msg.textContent = "Adicionado: " + r.name;
+        renderFriends();
       } else {
         msg.textContent = r.msg;
       }
     });
+
+    await renderFriends();
+    document.documentElement.style.visibility = "";
   }
 
-  function iniciar() {
-    aplicarNome();
-    iniciarAmigos();
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", iniciar);
-  } else {
-    iniciar();
-  }
-  window.addEventListener("load", aplicarNome); // garante caso os scripts da Roblox mexam na página
-
-  // Botão Logout (no menu da engrenagem): captura antes do script da Roblox
+  // logout do menu (o link do Roblox não tem href)
   document.addEventListener("click", function (e) {
-    var sair = e.target.closest('[data-behavior="logout"]');
-    if (sair) {
-      e.preventDefault();
-      e.stopPropagation();
-      Auth.logout(); // apaga a sessão e vai pro index.html
-    }
+    var el = e.target.closest ? e.target.closest('[data-behavior="logout"]') : null;
+    if (!el) return;
+    e.preventDefault();
+    e.stopPropagation();
+    Auth.logout();
   }, true);
+
+  document.addEventListener("DOMContentLoaded", iniciar);
 })();
