@@ -1,0 +1,44 @@
+/* style2.css - ajustes para celular (carregar DEPOIS do style.css) */
+
+@media (max-width: 768px) {
+  html, body { overflow-x: hidden; }
+
+  .body-width, #BodyWrapper, #RepositionBody, #MasterContainer {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+  .body-width { padding: 10px !important; }
+
+  h1 { font-size: 22px; }
+
+  #RedeemContainer { display: block; width: 100%; }
+  #Instructions, .redeem-right {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 0 16px 0 !important;
+    box-sizing: border-box;
+  }
+
+  #CodeInput {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+  #CodeInput .header { width: 100%; }
+  #pin {
+    flex: 1;
+    min-width: 0;
+    height: 40px;
+    font-size: 16px; /* evita o zoom automático no iPhone */
+    box-sizing: border-box;
+  }
+  .btn-primary.btn-small { padding: 10px 18px; font-size: 16px; }
+
+  .ResultContainer > div { width: auto !important; box-sizing: border-box; }
+
+  .footer-links { display: flex; flex-wrap: wrap; justify-content: center; }
+  .footer-link { float: none !important; width: auto !important; padding: 6px 10px; }
+}
