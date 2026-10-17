@@ -1,122 +1,153 @@
-const Auth = {
-  KEY_USERS: "oldrblx_users",
-  KEY_SESSION: "oldrblx_session",
-  KEY_NEXT_ID: "oldrblx_next_id",
+// ===== CONFIG DO SUPABASE =====
+const SUPABASE_URL = "https://upewvriimpcpktxwzxxo.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_7X00eY3rjYNkyK7hvfbskg_06exBASU";
+// ==============================
 
-  async hash(texto) {
-    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(texto));
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const Auth = {
+  _profile: null, // { id (uuid), numeric_id, username }
+
+  // usuário -> e-mail interno (o Supabase Auth exige e-mail)
+  _email(username) {
+    return username.trim().toLowerCase() + "@brasil16.app";
   },
 
-  // Lê as contas e, se alguma ainda não tem id (contas antigas), atribui em sequência
-  getUsers() {
-    const users = JSON.parse(localStorage.getItem(this.KEY_USERS) || "{}");
-    let next = parseInt(localStorage.getItem(this.KEY_NEXT_ID) || "1", 10);
-    let mudou = false;
+  async _carregarPerfil(session) {
+    if (!session) { this._profile = null; return; }
+    const { data } = await sb
+      .from("profiles")
+      .select("id, numeric_id, username")
+      .eq("id", session.user.id)
+      .maybeSingle();
+    this._profile = data || null;
+  },
 
-    // garante que o contador nunca fique abaixo de um id já existente
-    Object.values(users).forEach(u => {
-      if (u.id && u.id >= next) { next = u.id + 1; mudou = true; }
-    });
-    // contas antigas sem id
-    Object.values(users).forEach(u => {
-      if (!u.id) { u.id = next++; mudou = true; }
-    });
+  // As páginas devem fazer: await Auth.ready;
+  ready: null,
 
-    if (mudou) {
-      localStorage.setItem(this.KEY_USERS, JSON.stringify(users));
-      localStorage.setItem(this.KEY_NEXT_ID, String(next));
-    }
-    return users;
+  init() {
+    this.ready = sb.auth.getSession().then(({ data }) => this._carregarPerfil(data.session));
+    sb.auth.onAuthStateChange((evento, session) => {
+      if (evento === "SIGNED_OUT") this._profile = null;
+    });
   },
 
   async register(username, password) {
     username = username.trim();
     if (username.length < 3) return { ok: false, msg: "Usuário muito curto (mín. 3)." };
-    if (password.length < 4) return { ok: false, msg: "Senha muito curta (mín. 4)." };
-    const users = this.getUsers();
-    if (users[username.toLowerCase()]) return { ok: false, msg: "Esse usuário já existe." };
+    if (password.length < 8) return { ok: false, msg: "Senha muito curta (mín. 8)." };
 
-    // gera o próximo id (primeira conta = 1)
-    const id = parseInt(localStorage.getItem(this.KEY_NEXT_ID) || "1", 10);
-    localStorage.setItem(this.KEY_NEXT_ID, String(id + 1));
+    const { data, error } = await sb.auth.signUp({
+      email: this._email(username),
+      password: password,
+      options: { data: { username: username } }
+    });
 
-    users[username.toLowerCase()] = { id: id, name: username, pass: await this.hash(password) };
-    localStorage.setItem(this.KEY_USERS, JSON.stringify(users));
-    localStorage.setItem(this.KEY_SESSION, username);
-    return { ok: true, id: id };
+    if (error) {
+      const m = (error.message || "").toLowerCase();
+      if (m.includes("already")) return { ok: false, msg: "Esse usuário já existe." };
+      return { ok: false, msg: error.message };
+    }
+    if (!data.session) {
+      return { ok: false, msg: "Desligue o 'Confirm email' no Supabase (Auth → Providers → Email)." };
+    }
+    await this._carregarPerfil(data.session);
+    return { ok: true, id: this._profile ? this._profile.numeric_id : null };
   },
 
   async login(username, password) {
-    const user = this.getUsers()[username.trim().toLowerCase()];
-    if (!user || user.pass !== await this.hash(password)) {
-      return { ok: false, msg: "Usuário ou senha incorretos." };
-    }
-    localStorage.setItem(this.KEY_SESSION, user.name);
+    const { data, error } = await sb.auth.signInWithPassword({
+      email: this._email(username),
+      password: password
+    });
+    if (error) return { ok: false, msg: "Usuário ou senha incorretos." };
+    await this._carregarPerfil(data.session);
     return { ok: true };
   },
 
+  // Funciona depois de "await Auth.ready"
   currentUser() {
-    return localStorage.getItem(this.KEY_SESSION);
-  },
-
-  // Id da conta logada (ou de qualquer usuário pelo nome)
-  getId(username) {
-    const u = this.getUsers()[(username || "").trim().toLowerCase()];
-    return u ? u.id : null;
+    return this._profile ? this._profile.username : null;
   },
 
   currentId() {
-    const me = this.currentUser();
-    return me ? this.getId(me) : null;
+    return this._profile ? this._profile.numeric_id : null;
   },
 
-  logout() {
-    localStorage.removeItem(this.KEY_SESSION);
+  async getId(username) {
+    const { data } = await sb
+      .from("profiles")
+      .select("numeric_id")
+      .eq("username_lower", (username || "").trim().toLowerCase())
+      .maybeSingle();
+    return data ? data.numeric_id : null;
+  },
+
+  async logout() {
+    await sb.auth.signOut();
+    this._profile = null;
     location.href = "index.html";
   },
 
   // Sem conta/sessão -> manda pro index.html
-  requireLogin(destino = "index.html") {
+  async requireLogin(destino = "index.html") {
+    await this.ready;
     if (!this.currentUser()) location.replace(destino);
   },
 
-  // ---------- Amigos (por conta) ----------
-  _friendsKey() {
-    const me = this.currentUser();
-    return me ? "oldrblx_friends_" + me.toLowerCase() : null;
-  },
-
+  // ---------- Amigos ----------
   // Lista de nomes dos amigos da conta logada
-  getFriends() {
-    const key = this._friendsKey();
-    if (!key) return [];
-    try { return JSON.parse(localStorage.getItem(key) || "[]"); } catch (e) { return []; }
+  async getFriends() {
+    await this.ready;
+    if (!this._profile) return [];
+    const { data, error } = await sb
+      .from("friends")
+      .select("friend:profiles!friends_friend_id_fkey(username)")
+      .eq("user_id", this._profile.id);
+    if (error || !data) return [];
+    return data.map(r => r.friend.username);
   },
 
-  addFriend(username) {
-    const key = this._friendsKey();
-    if (!key) return { ok: false, msg: "Faça login primeiro." };
+  async addFriend(username) {
+    await this.ready;
+    if (!this._profile) return { ok: false, msg: "Faça login primeiro." };
     username = (username || "").trim();
     if (!username) return { ok: false, msg: "Digite um usuário." };
-    if (username.toLowerCase() === this.currentUser().toLowerCase()) {
+    if (username.toLowerCase() === this._profile.username.toLowerCase()) {
       return { ok: false, msg: "Você não pode adicionar a si mesmo." };
     }
-    const alvo = this.getUsers()[username.toLowerCase()];
+
+    const { data: alvo } = await sb
+      .from("profiles")
+      .select("id, username")
+      .eq("username_lower", username.toLowerCase())
+      .maybeSingle();
     if (!alvo) return { ok: false, msg: "Esse usuário não existe." };
-    const lista = this.getFriends();
-    if (lista.some(n => n.toLowerCase() === alvo.name.toLowerCase())) {
-      return { ok: false, msg: "Vocês já são amigos." };
+
+    const { error } = await sb
+      .from("friends")
+      .insert({ user_id: this._profile.id, friend_id: alvo.id });
+    if (error) {
+      if (error.code === "23505") return { ok: false, msg: "Vocês já são amigos." };
+      return { ok: false, msg: "Erro ao adicionar amigo." };
     }
-    lista.push(alvo.name);
-    localStorage.setItem(key, JSON.stringify(lista));
-    return { ok: true, name: alvo.name };
+    return { ok: true, name: alvo.username };
   },
 
-  removeFriend(username) {
-    const key = this._friendsKey();
-    if (!key) return;
-    const lista = this.getFriends().filter(n => n.toLowerCase() !== username.toLowerCase());
-    localStorage.setItem(key, JSON.stringify(lista));
+  async removeFriend(username) {
+    await this.ready;
+    if (!this._profile) return;
+    const { data: alvo } = await sb
+      .from("profiles")
+      .select("id")
+      .eq("username_lower", (username || "").trim().toLowerCase())
+      .maybeSingle();
+    if (!alvo) return;
+    await sb.from("friends").delete()
+      .eq("user_id", this._profile.id)
+      .eq("friend_id", alvo.id);
   }
 };
+
+Auth.init();
