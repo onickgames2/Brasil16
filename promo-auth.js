@@ -10,7 +10,7 @@
   var saldo = 0;
 
   // troque pela URL/anon key do seu projeto (ou use seu client existente)
-  var sb = supabase.createClient("SUA_URL", "SUA_ANON_KEY");
+  var sb = supabase.createClient("https://upewvriimpcpktxwzxxo.supabase.co", "sb_publishable_7X00eY3rjYNkyK7hvfbskg_06exBASU);
 
   var $ = function (id) { return document.getElementById(id); };
 
