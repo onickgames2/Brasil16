@@ -55,6 +55,20 @@
     });
   }
 
+  // botão de logout extra no menu da esquerda
+  function addLogoutNaEsquerda() {
+    var menu = document.querySelector("#navigation .rbx-scrollbar ul");
+    if (!menu || document.getElementById("nav-logout")) return;
+    var li = document.createElement("li");
+    var a = document.createElement("a");
+    a.id = "nav-logout";
+    a.href = "#";
+    a.setAttribute("data-behavior", "logout");
+    a.innerHTML = "<span>Logout</span>";
+    li.appendChild(a);
+    menu.insertBefore(li, menu.firstChild.nextSibling);
+  }
+
   async function iniciar() {
     await Auth.requireLogin();
     var nome = Auth.currentUser();
@@ -65,6 +79,8 @@
     if (hello) { hello.textContent = nome; hello.classList.remove("rbx-preload"); }
     var lead = document.querySelector(".rbx-left-col .rbx-lead a");
     if (lead) { lead.textContent = nome; lead.setAttribute("href", "#"); }
+
+    addLogoutNaEsquerda();
 
     // adicionar amigo
     var form = $("add-friend-form");
@@ -87,12 +103,17 @@
     document.documentElement.style.visibility = "";
   }
 
-  // logout do menu (o link do Roblox não tem href)
+  // logout: pega o clique ANTES do JS do Roblox
   document.addEventListener("click", function (e) {
-    var el = e.target.closest ? e.target.closest('[data-behavior="logout"]') : null;
+    var el = e.target.closest ? e.target.closest("a, [data-behavior]") : null;
     if (!el) return;
+    var ehLogout =
+      el.getAttribute("data-behavior") === "logout" ||
+      (el.tagName === "A" && /^\s*logout\s*$/i.test(el.textContent));
+    if (!ehLogout) return;
     e.preventDefault();
     e.stopPropagation();
+    e.stopImmediatePropagation();
     Auth.logout();
   }, true);
 
