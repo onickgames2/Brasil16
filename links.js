@@ -11,7 +11,7 @@
     profile: null,
     messages: null,
     friends: null,
-    avatar: null,
+    avatar: "avatar.html",
     inventory: null,
     trade: null,
     groups: null,
