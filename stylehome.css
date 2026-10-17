@@ -181,3 +181,264 @@ h2 {
   border: none;
   border-radius: 2px;
 }
+
+
+/* =====================================================================
+   HOME (home.html) - classes estilo Roblox 2016
+   O HTML usa classes rbx-*, home-*, card, etc., que antes vinham dos
+   CSS do Roblox (que não existem mais). Tudo abaixo substitui isso.
+   ===================================================================== */
+
+/* ---------- utilitários ---------- */
+.hidden, [ng-cloak] { display: none !important; }
+.rbx-text-overflow { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rbx-text-notes { color: #777; }
+.rbx-font-xs { font-size: 11px; }
+.rbx-font-sm { font-size: 12px; }
+.rbx-font-bold { font-weight: bold; }
+.abp, #chat-container { display: none; }          /* anúncios e chat (dependiam do Roblox) */
+#home-friends, #recently-visited-places, #friend-activity { box-sizing: border-box; }
+
+/* ---------- topbar ---------- */
+#header.rbx-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 40px;
+  background: #0078d7;
+  z-index: 1000;
+  font-size: 13px;
+}
+#header .container-fluid {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  box-sizing: border-box;
+  gap: 14px;
+}
+#header a { text-decoration: none; }
+
+.rbx-navbar-header { display: flex; align-items: center; gap: 10px; flex: none; }
+.rbx-nav-collapse { position: relative; color: #fff; font-size: 22px; line-height: 1; cursor: pointer; display: none; }
+.rbx-nav-notification {
+  position: absolute; top: -6px; right: -8px;
+  background: #d9534f; color: #fff; font-size: 10px;
+  padding: 1px 5px; border-radius: 10px;
+}
+
+/* logo (PC: imagem; mobile: texto) */
+#header .navbar-brand { display: block; color: #fff; }
+#header .navbar-brand .logo { display: block; height: 32px; }
+@media (max-width: 767px) {
+  #header .navbar-brand .logo::before {
+    content: "BRASIL16";
+    color: #fff; font-weight: bold; font-size: 16px; line-height: 32px;
+  }
+}
+
+/* links Games / Catalog / Develop / ROBUX */
+#header ul.rbx-navbar { list-style: none; margin: 0; padding: 0; display: flex; }
+#header ul.rbx-navbar li a { display: block; color: #fff; padding: 0 10px; line-height: 40px; }
+#header ul.rbx-navbar li a:hover { background: rgba(255, 255, 255, .15); }
+
+/* busca */
+.rbx-navbar-search { flex: 1; max-width: 320px; }
+.rbx-input-group { display: flex; }
+.rbx-input-group .rbx-input-field {
+  flex: 1; min-width: 0; height: 26px; border: none; border-radius: 2px 0 0 2px;
+  padding: 0 8px; font-size: 12px; box-sizing: border-box;
+}
+.rbx-input-group-btn { display: flex; }
+.rbx-input-addon-btn {
+  height: 26px; width: 32px; border: none; background: #e8e8e8;
+  border-radius: 0 2px 2px 0; cursor: pointer;
+}
+.rbx-navbar-search ul[data-toggle="dropdown-menu"] { display: none; }
+
+/* ícones à direita (settings / tix / robux / lupa) */
+.rbx-navbar-right { margin-left: auto; }
+.rbx-navbar-icon-group { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 16px; }
+.rbx-navbar-icon-group > li { position: relative; }
+.rbx-menu-item, .rbx-menu-icon { display: flex; align-items: center; gap: 4px; color: #fff; cursor: pointer; }
+.rbx-text-navbar-right { color: #fff; font-weight: 600; }
+.rbx-navbar-right-search { display: none; }
+
+/* popovers (settings / tix / robux) */
+.rbx-popover-content { display: none; }
+.rbx-dropdown-menu {
+  list-style: none; margin: 0; padding: 4px 0; min-width: 150px;
+  background: #fff; border: 1px solid #ccc; box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+}
+.rbx-dropdown-menu li a { display: block; padding: 7px 14px; color: #333; font-size: 12px; cursor: pointer; }
+.rbx-dropdown-menu li a:hover { background: #eee; }
+
+/* ---------- menu da esquerda ---------- */
+#navigation.rbx-left-col {
+  position: fixed;
+  top: 40px; bottom: 0; left: 0;
+  width: 180px;
+  background: #fff;
+  border-right: 1px solid #ccc;
+  overflow-y: auto;
+  z-index: 900;
+  box-sizing: border-box;
+}
+#navigation ul { list-style: none; margin: 0; padding: 0; }
+#navigation li a {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 14px; color: #333; text-decoration: none; font-size: 13px;
+}
+#navigation li a:hover { background: #eee; }
+#navigation .rbx-lead a { font-weight: bold; font-size: 14px; padding: 14px; }
+#navigation .rbx-divider { border-top: 1px solid #ddd; }
+#navigation .rbx-highlight {
+  margin-left: auto; background: #d9534f; color: #fff;
+  font-size: 10px; padding: 1px 6px; border-radius: 10px;
+}
+#navigation .rbx-highlight:empty { display: none; }
+#navigation .rbx-upgrade-now { padding: 10px 14px; }
+#navigation .rbx-upgrade-now a { display: block; text-align: center; padding: 6px 0; }
+#navigation .rbx-text-notes { padding: 10px 14px 4px; }
+#navigation .rbx-nav-sponsor a { padding: 6px 14px; }
+#navigation .rbx-nav-sponsor img { max-width: 100%; display: block; }
+
+/* ---------- área de conteúdo ---------- */
+.container-main { margin-left: 180px; padding-top: 40px; }
+.container-main .content { max-width: 1000px; margin: 0 auto; padding: 20px 15px; }
+.home-container { display: flex; flex-wrap: wrap; }
+.home-container .col-xs-12 { width: 100%; box-sizing: border-box; }
+.home-header h1 { font-size: 24px; margin: 0 0 15px; }
+.home-header h1 a { color: #333; text-decoration: none; }
+
+.section, .container-list {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+}
+.container-header, .section-header {
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid #ccc; padding-bottom: 6px; margin-bottom: 10px;
+}
+.container-header h3, .section-header h3 { margin: 0; font-size: 16px; }
+.container-header form { flex: 1; }
+
+/* botões */
+.rbx-btn-primary-sm, .rbx-btn-primary-xs, .rbx-btn-primary-lg,
+.rbx-btn-secondary-xs, .rbx-btn-control-xs {
+  display: inline-block; border: none; border-radius: 3px; cursor: pointer;
+  text-decoration: none; font-size: 12px; padding: 5px 12px; color: #fff;
+}
+.rbx-btn-primary-sm, .rbx-btn-primary-xs, .rbx-btn-primary-lg { background: #02b757; }
+.rbx-btn-secondary-xs { background: #0078d7; }
+.rbx-btn-control-xs { background: #888; }
+.btn-more { font-size: 11px; padding: 3px 9px; }
+.form-control, .rbx-input-field { border: 1px solid #bbb; border-radius: 2px; padding: 5px 8px; font-size: 12px; box-sizing: border-box; }
+#statusForm .rbx-input-field { width: 100%; margin-bottom: 8px; }
+#statusForm .rbx-control-label { display: none; color: #d9534f; }
+
+/* ---------- listas horizontais (amigos / jogos) ---------- */
+.hlist { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; margin: 0; padding: 0; }
+
+/* amigos (sobrescreve o .friend antigo, que tinha 80px) */
+#friend-list .friend {
+  width: 96px; padding: 6px; box-sizing: border-box; text-align: center;
+  background: #fff; border: 1px solid #ccc;
+}
+#friend-list .friend a { color: #333; text-decoration: none; display: block; }
+#friend-list .friend-name { display: block; margin-top: 5px; font-size: 11px; }
+
+/* cards de jogos */
+.card.game { width: 150px; background: #fff; border: 1px solid #ccc; padding: 5px; box-sizing: border-box; }
+.card-item { display: block; color: #333; text-decoration: none; }
+.card-thumb-wrapper { display: block; background: #e1e1e1; }
+.card-thumb { width: 100%; display: block; border: 1px solid #999; box-sizing: border-box; min-height: 100px; }
+.card-title { font-weight: bold; font-size: 12px; margin: 5px 0 2px; }
+.card-text-notes { display: block; color: #666; }
+.rbx-developer { color: #666; margin-top: 3px; }
+.rbx-developer cite { font-style: normal; color: #0078d7; }
+
+/* barra de votos */
+.vote-bar { display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+.voting-container { position: relative; flex: 1; height: 6px; background: #c9302c; border-radius: 3px; overflow: hidden; }
+.voting-container .background.no-votes { background: #ccc; }
+.voting-container .votes { position: absolute; top: 0; left: 0; bottom: 0; background: #02b757; }
+.voting-container .mask { display: none; }
+.vote-counts { display: flex; justify-content: space-between; color: #777; margin-top: 2px; }
+.vote-counts .down-votes-count { order: 1; }
+.vote-counts .up-votes-count { order: 0; }
+.vote-counts { flex-direction: row-reverse; }
+
+/* ---------- feed e blog ---------- */
+.vlist { list-style: none; margin: 10px 0 0; padding: 0; }
+.feeds .list-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #eee; }
+.feeds .header-thumb { width: 40px; height: 40px; border: 1px solid #ccc; }
+.feeds .list-body { flex: 1; min-width: 0; }
+.feeds .list-content { margin: 0 0 4px; word-wrap: break-word; }
+.feeds a { color: #0078d7; text-decoration: none; }
+.feeds .feedtext { color: #333; }
+.blog-news { list-style: none; margin: 0; padding: 0; }
+.blog-news .news { padding: 6px 0; border-bottom: 1px solid #eee; }
+.blog-news a { color: #0078d7; text-decoration: none; }
+
+/* ---------- rodapé ---------- */
+.container-footer { margin-left: 180px; border-top: 1px solid #ccc; background: #fff; }
+.container-footer .footer { max-width: 1000px; margin: 0 auto; padding: 15px; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 20px; list-style: none; margin: 0 0 10px; padding: 0; }
+.footer-link h2 { margin: 0; border: 0; padding: 0; font-size: 13px; }
+.footer-link a { color: #0078d7; text-decoration: none; }
+.footer-note { font-size: 11px; color: #777; margin: 0; }
+
+/* ---------- ÍCONES (provisórios) ----------
+   Troque pelos ícones da imagem https://files.catbox.moe/08wel3.png
+   quando eu souber o tamanho/ordem do sprite. Exemplo do formato final:
+
+   [class^="rbx-icon-nav-"] {
+     background: url('https://files.catbox.moe/08wel3.png') no-repeat;
+     width: 24px; height: 24px; display: inline-block;
+   }
+   .rbx-icon-nav-home { background-position: 0 0; }
+*/
+.rbx-icon-nav-menu::before { content: "\2630"; }
+.rbx-icon-nav-settings::before { content: "\2699"; color: #fff; font-size: 16px; }
+.rbx-icon-nav-tix::before { content: "T$"; color: #fff; font-weight: bold; font-size: 11px; }
+.rbx-icon-nav-robux::before { content: "R$"; color: #fff; font-weight: bold; font-size: 11px; }
+.rbx-icon-nav-search::before, .rbx-icon-nav-search-white::before { content: "\2315"; font-size: 16px; }
+.rbx-icon-nav-search-white::before { color: #fff; }
+
+/* ---------- mobile ---------- */
+@media (max-width: 767px) {
+  .rbx-nav-collapse { display: block; }
+  .rbx-navbar-right-search { display: block; }
+
+  /* links Games/Catalog/... viram uma segunda barra */
+  #header ul.rbx-navbar.hidden-xs { display: none; }
+  #header ul.rbx-navbar.hidden-md {
+    position: fixed; top: 40px; left: 0; right: 0; height: 32px;
+    background: #0063b1; justify-content: space-around;
+  }
+  #header ul.rbx-navbar.hidden-md li a { line-height: 32px; font-size: 12px; }
+
+  /* busca: aparece abaixo da barra quando a lupa é tocada */
+  .rbx-navbar-search {
+    position: absolute; top: 72px; left: 0; right: 0; max-width: none;
+    background: #0063b1; padding: 6px 12px;
+  }
+  #header .container-fluid > .rbx-navbar-search { display: none; }
+
+  /* menu da esquerda: escondido até tocar no hambúrguer */
+  #navigation.rbx-left-col { display: none; top: 72px; width: 220px; box-shadow: 2px 0 6px rgba(0, 0, 0, .25); }
+
+  .container-main { margin-left: 0; padding-top: 72px; }
+  .container-footer { margin-left: 0; }
+  .home-header-content { padding-left: 15px; }
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 768px) {
+  #header ul.rbx-navbar.hidden-md { display: none; }
+  #navigation.rbx-left-col { display: block !important; }
+  .home-left-col { order: 1; }
+  .home-right-col { order: 2; }
+  .home-container .col-sm-6 { width: 50%; box-sizing: border-box; padding: 0 7px; }
+}
