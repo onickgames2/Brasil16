@@ -1,16 +1,17 @@
-(function () {
+(async function () {
+  // Esconde a página até saber se tem login (o perfil carrega de forma assíncrona)
+  document.documentElement.style.display = "none";
+
+  await Auth.ready;
+
   if (!Auth.currentUser()) {
-    document.documentElement.style.display = "none";
-    Auth.requireLogin("index.html");
+    location.replace("index.html");
     return;
   }
 
   var user = Auth.currentUser();
-  var userKey = user.toLowerCase();
   var saldo = 0;
-
-  // troque pela URL/anon key do seu projeto (ou use seu client existente)
-  var sb = supabase.createClient("https://upewvriimpcpktxwzxxo.supabase.co", "sb_publishable_7X00eY3rjYNkyK7hvfbskg_06exBASU);
+  var enviando = false;
 
   var $ = function (id) { return document.getElementById(id); };
 
@@ -40,14 +41,13 @@
     }
   }
 
+  // usa o client "sb" criado no auth.js
   async function carregarSaldo() {
-    var r = await sb.from("wallets").select("robux")
-      .eq("username", userKey).maybeSingle();
+    var r = await sb.from("wallets").select("robux").maybeSingle();
     saldo = r.data ? r.data.robux : 0;
     atualizarTopo();
   }
 
-  var enviando = false;
   async function resgatar() {
     if (enviando) return;
     var code = $("pin").value.trim().toUpperCase();
@@ -57,17 +57,19 @@
     enviando = true;
     $("busy").style.display = "inline";
 
-    var r = await sb.rpc("redeem_code", { p_username: userKey, p_code: code });
+    var r = await sb.rpc("redeem_code", { p_code: code });
+
     enviando = false;
     $("busy").style.display = "none";
 
     if (r.error || !r.data) {
+      console.error(r.error);
       return mostrarErro("Erro de conexão. Tente de novo.");
     }
     if (!r.data.ok) {
-      return mostrarErro(r.data.error === "used"
-        ? "Você já resgatou este código."
-        : "Código inválido ou expirado.");
+      if (r.data.error === "used") return mostrarErro("Você já resgatou este código.");
+      if (r.data.error === "not_logged") return mostrarErro("Faça login novamente.");
+      return mostrarErro("Código inválido ou expirado.");
     }
 
     saldo = r.data.balance;
@@ -77,23 +79,37 @@
       " Robux. Saldo atual: " + saldo + " Robux.");
   }
 
+  // Captura o clique ANTES do onclick original (que chama o script da Roblox)
   document.addEventListener("click", function (e) {
     if (e.target.closest(".btn-primary.btn-small")) {
-      e.preventDefault(); e.stopPropagation(); resgatar(); return;
+      e.preventDefault();
+      e.stopPropagation();
+      resgatar();
+      return;
     }
     if (e.target.closest("#head-login, .rbx-navbar-signup")) {
-      e.preventDefault(); e.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
     }
   }, true);
 
   document.addEventListener("keydown", function (e) {
     if (e.key === "Enter" && e.target.id === "pin") {
-      e.preventDefault(); resgatar();
+      e.preventDefault();
+      resgatar();
     }
   }, true);
 
-  document.addEventListener("DOMContentLoaded", function () {
+  function iniciar() {
     esconderResultados();
     carregarSaldo();
-  });
+    document.documentElement.style.display = "";
+  }
+
+  // como esperamos o login, o DOM pode já ter carregado
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", iniciar);
+  } else {
+    iniciar();
+  }
 })();
