@@ -8,19 +8,37 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const Auth = {
   _profile: null, // { id (uuid), numeric_id, username }
 
-  // usuário -> e-mail interno (o Supabase Auth exige e-mail)
   _email(username) {
     return username.trim().toLowerCase() + "@brasil16.app";
   },
 
-  async _carregarPerfil(session) {
-    if (!session) { this._profile = null; return; }
-    const { data } = await sb
+  async _buscarPerfil(uid) {
+    const { data, error } = await sb
       .from("profiles")
       .select("id, numeric_id, username")
-      .eq("id", session.user.id)
+      .eq("id", uid)
       .maybeSingle();
-    this._profile = data || null;
+    if (error) console.error("Erro ao buscar perfil:", error);
+    return data || null;
+  },
+
+  async _carregarPerfil(session) {
+    if (!session) { this._profile = null; return; }
+    const uid = session.user.id;
+
+    let perfil = await this._buscarPerfil(uid);
+
+    // fallback: perfil não existe -> cria a partir do nome salvo no cadastro
+    if (!perfil) {
+      const meta = session.user.user_metadata || {};
+      const nome = meta.username;
+      if (nome) {
+        const { error } = await sb.from("profiles").insert({ id: uid, username: nome });
+        if (error) console.error("Erro ao criar perfil:", error);
+        perfil = await this._buscarPerfil(uid);
+      }
+    }
+    this._profile = perfil;
   },
 
   // As páginas devem fazer: await Auth.ready;
@@ -28,7 +46,7 @@ const Auth = {
 
   init() {
     this.ready = sb.auth.getSession().then(({ data }) => this._carregarPerfil(data.session));
-    sb.auth.onAuthStateChange((evento, session) => {
+    sb.auth.onAuthStateChange((evento) => {
       if (evento === "SIGNED_OUT") this._profile = null;
     });
   },
@@ -52,8 +70,12 @@ const Auth = {
     if (!data.session) {
       return { ok: false, msg: "Desligue o 'Confirm email' no Supabase (Auth → Providers → Email)." };
     }
+
     await this._carregarPerfil(data.session);
-    return { ok: true, id: this._profile ? this._profile.numeric_id : null };
+    if (!this._profile) {
+      return { ok: false, msg: "Conta criada, mas o perfil não foi gerado. Veja o console (F12) e o SQL do Supabase." };
+    }
+    return { ok: true, id: this._profile.numeric_id };
   },
 
   async login(username, password) {
@@ -62,11 +84,14 @@ const Auth = {
       password: password
     });
     if (error) return { ok: false, msg: "Usuário ou senha incorretos." };
+
     await this._carregarPerfil(data.session);
+    if (!this._profile) {
+      return { ok: false, msg: "Login ok, mas o perfil não existe. Veja o console (F12)." };
+    }
     return { ok: true };
   },
 
-  // Funciona depois de "await Auth.ready"
   currentUser() {
     return this._profile ? this._profile.username : null;
   },
@@ -90,14 +115,12 @@ const Auth = {
     location.href = "index.html";
   },
 
-  // Sem conta/sessão -> manda pro index.html
   async requireLogin(destino = "index.html") {
     await this.ready;
     if (!this.currentUser()) location.replace(destino);
   },
 
   // ---------- Amigos ----------
-  // Lista de nomes dos amigos da conta logada
   async getFriends() {
     await this.ready;
     if (!this._profile) return [];
@@ -105,8 +128,8 @@ const Auth = {
       .from("friends")
       .select("friend:profiles!friends_friend_id_fkey(username)")
       .eq("user_id", this._profile.id);
-    if (error || !data) return [];
-    return data.map(r => r.friend.username);
+    if (error) { console.error("Erro ao listar amigos:", error); return []; }
+    return (data || []).map(r => r.friend.username);
   },
 
   async addFriend(username) {
@@ -130,6 +153,7 @@ const Auth = {
       .insert({ user_id: this._profile.id, friend_id: alvo.id });
     if (error) {
       if (error.code === "23505") return { ok: false, msg: "Vocês já são amigos." };
+      console.error("Erro ao adicionar amigo:", error);
       return { ok: false, msg: "Erro ao adicionar amigo." };
     }
     return { ok: true, name: alvo.username };
