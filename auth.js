@@ -113,9 +113,9 @@ if (error) {
   },
 
   async logout() {
-    await sb.auth.signOut();
-    this._profile = null;
-    location.href = "index.html";
+  try { await sb.auth.signOut(); } catch (e) { console.error(e); }
+  this._profile = null;
+  location.replace("index.html");
   },
 
   async requireLogin(destino = "index.html") {
