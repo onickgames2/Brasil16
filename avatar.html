@@ -1,26 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <title>BRASIL16 AVATAR EDITOR</title>
-    <link rel="stylesheet" href="./style.css">
-
-  </head>
-    
-  <body>
-  <!DOCTYPE html>
-<!--[if IE 8]><html class="ie8" ng-app="robloxApp"><![endif]-->
-<!--[if gt IE 8]><!-->
-<html>
-<!--<![endif]-->
-
 <head data-machine-id="CHI3-WEB1420">
   <!-- MachineID: CHI3-WEB1420 -->
   <title>Avatar - BRASIL16</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,requiresActiveX=true" />
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
   <meta name="author" content="Roblox Corporation" />
   <meta name="description" content="Roblox is a global platform that brings people together through play." />
   <meta name="keywords" content="free games, online games, building games, virtual worlds, free mmo, gaming cloud, physics engine" />
@@ -365,6 +351,9 @@
 
   <link rel="stylesheet" onerror="Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)" data-bundlename="UserAgreementsChecker" data-bundle-source="Main" href="https://css.rbxcdn.com/d5a3728b78be729b693aadf79a1f45f0fa49c15fe863a0d7dd631b75f9e82207.css" />
 
+  <!-- Seu CSS (carrega por último para poder sobrescrever o do Roblox) -->
+  <link rel="stylesheet" href="./style.css">
+
   <script type="text/javascript">
     var Roblox = Roblox || {};
     Roblox.RealTimeSettings = Roblox.RealTimeSettings || {
@@ -492,8 +481,6 @@
 
   <script type="text/javascript" onerror="Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)" data-monitor="true" data-bundlename="RealTime" data-bundle-source="Main" src="https://js.rbxcdn.com/be7371c9a0dd4cb1e560221bc77c8c7b7087f06ac0aba9df528c819ab6f2bdc9.js"></script>
   <script type="text/javascript" onerror="Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)" data-monitor="true" data-bundlename="CrossTabCommunication" data-bundle-source="Main" src="https://js.rbxcdn.com/948f3bfc9bbd152f537592b51c1a7765cdc0dfc538d74b7e5fc696c476c8792b.js"></script>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
 
   <script type="text/javascript">
     var Roblox = Roblox || {};
@@ -686,62 +673,49 @@
   <div id="wrap" class="wrap no-gutter-ads logged-in" data-gutter-ads-enabled="false">
 
     <div id="navigation-container" class="light-theme gotham-font  ixp-marketplace-rename-treatment" data-safety-support-item-rollout="0" data-number-of-autocomplete-suggestions="7" data-is-redirect-library-to-creator-marketplace-enabled="True">
+
+      <!-- ===== HEADER ANTIGO (estilo 2017) ===== -->
       <div id="header" class="navbar-fixed-top rbx-header" role="navigation">
         <div class="container-fluid">
           <div class="rbx-navbar-header">
-            <div id="header-menu-icon" class="rbx-nav-collapse">
-              <button type="button" class="btn-navigation-nav-menu-md menu-button">
-                <span class="icon-nav-menu"></span>
-              </button>
-            </div>
             <div class="navbar-header">
               <a class="navbar-brand" href="/home">
-                <span class="icon-logo"></span><span class="icon-logo-r"></span>
+                <span class="icon-logo"></span>
+                <span class="icon-logo-r"></span>
               </a>
             </div>
           </div>
-          <ul class="nav rbx-navbar hidden-xs hidden-sm col-md-5 col-lg-4">
-            <li>
-              <a class="font-header-2 nav-menu-title text-header" href="/discover">Discover</a>
-            </li>
-            <li>
-              <a class="font-header-2 nav-menu-title text-header" href="/catalog">Marketplace</a>
-            </li>
-            <li>
-              <a class="font-header-2 nav-menu-title text-header" href="/develop">Create</a>
-            </li>
-            <li>
-              <a class="font-header-2 nav-menu-title text-header robux-menu-btn" href="/robux?ctx-nav">
-                <div class="menu-text-container">
-                  <span class="robux-10-percent-more-label">10% More</span>
-                  <span class="font-header-2 robux-btn">Robux</span>
-                </div>
-              </a>
-            </li>
+
+          <ul class="nav rbx-navbar hidden-xs hidden-sm col-md-4 col-lg-3">
+            <li><a class="nav-menu-title" href="/games">Games</a></li>
+            <li><a class="nav-menu-title" href="/catalog">Catalog</a></li>
+            <li><a class="nav-menu-title" href="/develop">Develop</a></li>
+            <li><a class="buy-robux nav-menu-title" href="/upgrades/robux?ctx=nav">ROBUX</a></li>
           </ul>
 
-          <ul class="nav rbx-navbar hidden-md hidden-lg col-xs-12">
-            <li>
-              <a class="font-header-2 nav-menu-title text-header" href="/discover">Discover</a>
-            </li>
-            <li>
-              <a class="font-header-2 nav-menu-title text-header" href="/catalog">Marketplace</a>
-            </li>
-            <li>
-              <a class="font-header-2 nav-menu-title text-header" href="/develop">Create</a>
-            </li>
-            <li>
-              <a class="font-header-2 nav-menu-title text-header robux-menu-btn" href="/robux?ctx=nav">
-                <div class="menu-text-container">
-                  <span class="robux-10-percent-more-label">10% More</span>
-                  <span class="font-header-2 robux-btn">Robux</span>
-                </div>
-              </a>
-            </li>
-          </ul>
+          <div id="navbar-universal-search" class="navbar-left rbx-navbar-search col-xs-5 col-sm-6 col-md-3" role="search">
+            <div class="input-group">
+              <input id="navbar-search-input" class="form-control input-field" type="text" placeholder="Search" maxlength="120" />
+              <div class="input-group-btn">
+                <button id="navbar-search-btn" class="input-addon-btn" type="submit">
+                  <span class="icon-nav-search"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
           <div id="right-navigation-header"></div>
+
+          <ul class="nav rbx-navbar hidden-md hidden-lg col-xs-12">
+            <li><a class="nav-menu-title" href="/games">Games</a></li>
+            <li><a class="nav-menu-title" href="/catalog">Catalog</a></li>
+            <li><a class="nav-menu-title" href="/develop">Develop</a></li>
+            <li><a class="buy-robux nav-menu-title" href="/upgrades/robux?ctx=nav">ROBUX</a></li>
+          </ul>
         </div>
       </div>
+      <!-- ===== FIM DO HEADER ===== -->
+
       <div id="left-navigation-container"></div>
       <div id="verificationUpsell-container">
         <div verificationUpsell-container></div>
@@ -767,13 +741,7 @@
       })();
     </script>
 
-    <main class="container-main 
-                
-                
-                
-                
-                
-                " id="container-main" tabindex="-1">
+    <main class="container-main" id="container-main" tabindex="-1">
       <script type="text/javascript">
         if (top.location != self.location) {
           top.location = self.location.href;
@@ -1300,23 +1268,4 @@
   <script type="text/javascript" onerror="Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)" data-monitor="true" data-bundlename="IdVerification" data-bundle-source="Main" src="https://js.rbxcdn.com/ec57430470727110a5377ce654e11b91e5ae3340ba8131372b0d6641c668ccd3.js"></script>
   <script type="text/javascript" onerror="Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)" data-monitor="true" data-bundlename="DynamicLocalizationResourceScript_Verification.Identity" data-bundle-source="Unknown" src="https://js.rbxcdn.com/aa509e91fbb9e9139fe1f10bc42ad81e30176bdd860a74c78db1df574bfd739a.js"></script>
   <script type="text/javascript" onerror="Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)" data-monitor="true" data-bundlename="DynamicLocalizationResourceScript_Verification.Identity" data-bundle-source="Unknown" src="https://js.rbxcdn.com/33d70fea050f4130a91d28961f193829c786ce9004bf26d652c9c7335e3e3c61.js"></script>
-  <script type="text/javascript" onerror="Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)" data-monitor="true" data-bundlename="GameLaunch" data-bundle-source="Main" src="https://js.rbxcdn.com/25ccf4d34e04458d534d4932b215407f9aff7a15a67d37e8ff0d5ac7831d81e9.js"></script>
-  <script type="text/javascript" onerror="Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)" data-monitor="true" data-bundlename="DynamicLocalizationResourceScript_Common.VisitGame" data-bundle-source="Unknown" src="https://js.rbxcdn.com/396892e9ffe25652a4b137c7f5d41a4e4793d20bbad8b4194f7022036685e943.js"></script>
-  <script type="text/javascript" onerror="Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)" data-monitor="true" data-bundlename="DynamicLocalizationResourceScript_Common.VisitGame" data-bundle-source="Unknown" src="https://js.rbxcdn.com/0104be627f13e60fbdee4407851f3864c514a290575109ffb39f4261fd9886b2.js"></script>
-  <script type="text/javascript" onerror="Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)" data-monitor="true" data-bundlename="DynamicLocalizationResourceScript_Feature.GameLaunchGuestMode" data-bundle-source="Unknown" src="https://js.rbxcdn.com/f41ec06eeae79fa94e6ae9f435b0a1c6743085e898884eddb4d4025ca3af8a44.js"></script>
-  <script type="text/javascript" onerror="Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)" data-monitor="true" data-bundlename="DynamicLocalizationResourceScript_Feature.GameLaunchGuestMode" data-bundle-source="Unknown" src="https://js.rbxcdn.com/6852af8f7df15395ccb3d121a914ee7301a7162f5afb3395575c6075c617923f.js"></script>
-
-  <script type="text/javascript" onerror="Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)" data-monitor="true" data-bundlename="UserAgreementsChecker" data-bundle-source="Main" src="https://js.rbxcdn.com/4b8ea6a87cd4886cab02751a4d4fc7c3ca523372514c8e6d0d0ba1a4030b3f05.js"></script>
-  <script type="text/javascript" onerror="Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)" data-monitor="true" data-bundlename="DynamicLocalizationResourceScript_CommonUI.UserAgreements" data-bundle-source="Unknown" src="https://js.rbxcdn.com/78f1b6664025b85fca1465334a8f57944801a8dc52c55a74ddd3837036c13efe.js"></script>
-  <script type="text/javascript" onerror="Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)" data-monitor="true" data-bundlename="DynamicLocalizationResourceScript_CommonUI.UserAgreements" data-bundle-source="Unknown" src="https://js.rbxcdn.com/e4ef0417c188ca9bd99f3b05403fd4bfd6ba2e7d2e07323c570e69102ebc0044.js"></script>
-
-  <script onerror='Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)' data-monitor='true' data-bundlename='pageEnd' type='text/javascript' src='https://js.rbxcdn.com/da9472b46fcec74a8c0800d9717ffa60.js'></script>
-
-</body>
-
-</html>
-    <script  src="./script.js"></script>
-
-  </body>
-  
-</html>
+  <script 
