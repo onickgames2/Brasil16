@@ -1,1457 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <title>Brasil16</title>
-    <link rel="stylesheet" href="./style.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./auth.js"></script>
-<script src="./nav.js"></script>
-<script src="./home-auth.js"></script>
-<script src="./icons.js"></script>
-
-<style>
-  /* remove a foto de perfil ao lado do nick */
-  .home-thumbnail-bust { display: none !important; }
-  .home-header-content { margin-left: 0 !important; padding-left: 0 !important; }
-
-  /* mobile: "Hello, username" mais pro lado */
-  @media (max-width: 767px) {
-    .home-header-content {
-      float: none !important;
-      width: auto !important;
-      text-align: left !important;
-      padding-left: 15px !important;
-    }
-  }
-
-  /* lista de amigos */
-  #friend-list .friend { position: relative; }
-  #friend-list .friend-avatar {
-    display: flex; align-items: center; justify-content: center;
-    width: 84px; height: 84px; margin: 0 auto;
-    background: #e1e1e1; color: #555; font-size: 32px; font-weight: 700;
-    border-radius: 4px;
-  }
-  #friend-list .friend-remove {
-    position: absolute; top: 2px; right: 6px;
-    cursor: pointer; color: #999; font-size: 18px; line-height: 1;
-  }
-  #friend-list .friend-remove:hover { color: #d33; }
-  #friend-empty { padding: 10px 0; color: #777; }
-  #add-friend-msg { margin-left: 8px; }
-</style>
-
-  </head>
-    
-  <body>
-<!--[if IE 8]><html class="ie8" ng-app="robloxApp"><![endif]-->
-<!--[if gt IE 8]><!-->
-<html>
-<!--<![endif]-->
 <head>
-    <!-- MachineID: WEB171 -->
-    <title>Home - BRASIL16</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,requiresActiveX=true" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="ROBLOX Corporation" />
-    <meta name="description" content="User-generated MMO gaming site for kids, teens, and adults. Players architect their own worlds. Builders create free online games that simulate the real world. Create and play amazing 3D games. An online gaming cloud and distributed physics engine." />
-    <meta name="keywords" content="free games, online games, building games, virtual worlds, free mmo, gaming cloud, physics engine" />
-    <meta name="apple-itunes-app" content="app-id=431946152" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home - BRASIL16</title>
+  <meta name="description" content="Brasil16">
+  <link rel="icon" href="/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
 
-    <meta name="google-site-verification" content="KjufnQUaDv5nXJogvDMey4G-Kb7ceUVxTdzcMaP9pCY" />
-    
-    <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
-
-    
-    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600,700" rel="stylesheet" type="text/css">
-
-    
-    
-<link rel='stylesheet' href='http://www.roblox.com/CSS/Base/CSS/FetchCSS?path=leanbase___213b3e760be9513b17fafaa821f394bf_m.css' />
-
-    
-<link rel='stylesheet' href='http://www.roblox.com/CSS/Base/CSS/FetchCSS?path=page___47b79e13014f607f8bba2a5bcaeef6d8_m.css' />
-
-    
-    
-    
-    <script type='text/javascript' src='//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.1.min.js'></script>
-<script type='text/javascript'>window.jQuery || document.write("<script type='text/javascript' src='/js/jquery/jquery-1.11.1.js'><\/script>")</script>
-<script type='text/javascript' src='//ajax.aspnetcdn.com/ajax/jquery.migrate/jquery-migrate-1.2.1.min.js'></script>
-<script type='text/javascript'>window.jQuery || document.write("<script type='text/javascript' src='/js/jquery/jquery-migrate-1.2.1.js'><\/script>")</script>
-
-
-    
-    <script type='text/javascript' src='http://js.rbxcdn.com/2580e8485e871856bb8abe4d0d297bd2.js.gzip'></script>
-
-
-    
-    
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-
-<script type="text/javascript">
-    var Roblox = Roblox || {};
-    Roblox.AdsHelper = Roblox.AdsHelper || {};
-
-    Roblox.AdsHelper.toggleAdsSlot = function (slotId, GPTRandomSlotIdentifier) {
-        var gutterAdsEnabled = false;
-        if (gutterAdsEnabled) {
-            googletag.display(GPTRandomSlotIdentifier);
-            return;
-        }
-        
-        if (typeof slotId !== 'undefined' && slotId && slotId.length > 0) {
-            var slotElm = $("#"+slotId);
-            if (slotElm.is(":visible")) {
-                googletag.display(GPTRandomSlotIdentifier);
-            }else {
-                switch(slotId) {
-                    case "Skyscraper-Adp-Left":
-                        Roblox.AdsHelper.adLeftTemplate = slotElm.html();
-                        slotElm.empty();
-                        break;
-                    case "Skyscraper-Adp-Right":
-                        Roblox.AdsHelper.adRightTemplate = slotElm.html();
-                        slotElm.empty();
-                        break;
-                    case "Leaderboard-Abp":
-                        Roblox.AdsHelper.adLeaderboardTemplate = slotElm.html();
-                        slotElm.empty();
-                        break;
-                    case "GamePageAdDiv1":
-                        Roblox.AdsHelper.adGamePageAdDiv1Template = slotElm.html();
-                        slotElm.empty();
-                        break;
-                    case "GamePageAdDiv2":
-                        Roblox.AdsHelper.adGamePageAdDiv2Template = slotElm.html();
-                        slotElm.empty();
-                        break;
-                    case "GamePageAdDiv3":
-                        Roblox.AdsHelper.adGamePageAdDiv3Template = slotElm.html();
-                        slotElm.empty();
-                        break;
-                    case "ProfilePageAdDiv1":
-                        Roblox.AdsHelper.adProfilePageAdDiv1Template = slotElm.html();
-                        slotElm.empty();
-                        break;
-                    case "ProfilePageAdDiv2":
-                        Roblox.AdsHelper.adProfilePageAdDiv2Template = slotElm.html();
-                        slotElm.empty();
-                        break;
-                    default:
-                        return;
-                } 
-            }
-        }
+  <style>
+    /* mobile: "Hello, username" mais pro lado */
+    .home-header-content { margin-left: 0 !important; padding-left: 0 !important; }
+    @media (max-width: 767px) {
+      .home-header-content {
+        float: none !important;
+        width: auto !important;
+        text-align: left !important;
+        padding-left: 15px !important;
+      }
     }
-</script><script type="text/javascript">
-    $(function () {
-        Roblox.JSErrorTracker.initialize({ 'suppressConsoleError': true});
-    });
-</script>
 
+    /* pre-load: placeholder animado enquanto o nick carrega */
+    .rbx-preload {
+      display: inline-block; min-width: 110px; height: 0.9em;
+      vertical-align: middle; border-radius: 3px; color: transparent;
+      background: linear-gradient(90deg, #e6e6e6 25%, #f4f4f4 50%, #e6e6e6 75%);
+      background-size: 200% 100%;
+      animation: rbx-shimmer 1.2s linear infinite;
+    }
+    @keyframes rbx-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 
+    /* lista de amigos */
+    #friend-list .friend { position: relative; }
+    #friend-list .friend-avatar {
+      display: flex; align-items: center; justify-content: center;
+      width: 84px; height: 84px; margin: 0 auto;
+      background: #e1e1e1; color: #555; font-size: 32px; font-weight: 700;
+      border-radius: 4px;
+    }
+    #friend-list .friend-remove {
+      position: absolute; top: 2px; right: 6px;
+      cursor: pointer; color: #999; font-size: 18px; line-height: 1;
+    }
+    #friend-list .friend-remove:hover { color: #d33; }
+    #friend-empty { padding: 10px 0; color: #777; }
+    #add-friend-box { margin-top: 10px; }
+    #add-friend-msg { margin-left: 8px; }
+    .empty-note { padding: 10px 0; color: #777; }
+  </style>
 
-    
-    <!--[if lt IE 9]>
-        <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-    	<script type="text/javascript">
-
-        var _gaq = _gaq || [];
-
-		    _gaq.push(['_setAccount', 'UA-11419793-1']);
-		    _gaq.push(['_setCampSourceKey', 'rbx_source']);
-		    _gaq.push(['_setCampMediumKey', 'rbx_medium']);
-		    _gaq.push(['_setCampContentKey', 'rbx_campaign']);
-		        _gaq.push(['_setDomainName', 'roblox.com']);
-		_gaq.push(['b._setAccount', 'UA-486632-1']);
-		_gaq.push(['b._setCampSourceKey', 'rbx_source']);
-		_gaq.push(['b._setCampMediumKey', 'rbx_medium']);
-		_gaq.push(['b._setCampContentKey', 'rbx_campaign']);
-
-		_gaq.push(['b._setDomainName', 'roblox.com']);
-        
-            _gaq.push(['b._setCustomVar', 1, 'Visitor', 'Member', 2]);
-            _gaq.push(['b._trackPageview']);    
-        
-        
-        
-
-		_gaq.push(['c._setAccount', 'UA-26810151-2']);
-		_gaq.push(['c._setDomainName', 'roblox.com']);
-
-		(function() {
-			var ga = document.createElement('script');
-			ga.type = 'text/javascript';
-			ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(ga, s);
-		})();
-
-	</script>
-
-            <div id="EventStreamData"
-             data-default-url="//ecsv2.roblox.com/www/e.png"
-             data-www-url="//ecsv2.roblox.com/www/e.png"
-             data-studio-url="//ecsv2.roblox.com/pe?t=studio"></div>
-
-
-<script type="text/javascript">
-    // IMPORTANT! If the user is logged in, set to user_id; else, set to ''
-    var _user_id = '62402235';
-
-    // IMPORTANT! Set to a unique session ID for the visitor's current browsing session.
-    var _session_id = '62402235';
-
-    var _sift = window._sift = window._sift || [];
-
-    // IMPORTANT! Insert your JavaScript snippet key here!
-    _sift.push(['_setAccount', '5238aa5d58']);
-
-    _sift.push(['_setUserId', _user_id]);
-    _sift.push(['_setSessionId', _session_id]);
-    _sift.push(['_trackPageview']);
-
-    (function () {
-        function ls() {
-            var e = document.createElement('script');
-            e.type = 'text/javascript';
-            e.async = true;
-            e.src = ('https:' === document.location.protocol ? 'https://' : 'http://') + 'cdn.siftscience.com/s.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(e, s);
-        }
-        if (window.attachEvent) {
-            window.attachEvent('onload', ls);
-        } else {
-            window.addEventListener('load', ls, false);
-        }
-    }());
-</script>    <script type="text/javascript">
-if (typeof(Roblox) === "undefined") { Roblox = {}; }
-Roblox.Endpoints = Roblox.Endpoints || {};
-Roblox.Endpoints.Urls = Roblox.Endpoints.Urls || {};
-Roblox.Endpoints.Urls['/asset/'] = 'http://assetgame.roblox.com/asset/';
-Roblox.Endpoints.Urls['/client-status/set'] = 'http://www.roblox.com/client-status/set';
-Roblox.Endpoints.Urls['/client-status'] = 'http://www.roblox.com/client-status';
-Roblox.Endpoints.Urls['/game/'] = 'http://assetgame.roblox.com/game/';
-Roblox.Endpoints.Urls['/game/edit.ashx'] = 'http://assetgame.roblox.com/game/edit.ashx';
-Roblox.Endpoints.Urls['/game/getauthticket'] = 'http://assetgame.roblox.com/game/getauthticket';
-Roblox.Endpoints.Urls['/game/placelauncher.ashx'] = 'http://assetgame.roblox.com/game/placelauncher.ashx';
-Roblox.Endpoints.Urls['/game/report-stats'] = 'http://assetgame.roblox.com/game/report-stats';
-Roblox.Endpoints.Urls['/game/report-event'] = 'http://assetgame.roblox.com/game/report-event';
-Roblox.Endpoints.Urls['/chat/chat'] = 'http://misc.roblox.com/chat/chat';
-Roblox.Endpoints.Urls['/presence/users'] = 'http://www.roblox.com/presence/users';
-Roblox.Endpoints.Urls['/presence/user'] = 'http://www.roblox.com/presence/user';
-Roblox.Endpoints.Urls['/friends/list'] = 'http://www.roblox.com/friends/list';
-Roblox.Endpoints.Urls['/navigation/getCount'] = 'http://www.roblox.com/navigation/getCount';
-Roblox.Endpoints.Urls['/catalog/browse.aspx'] = 'http://www.roblox.com/catalog/browse.aspx';
-Roblox.Endpoints.Urls['/catalog/html'] = 'http://search.roblox.com/catalog/html';
-Roblox.Endpoints.Urls['/catalog/json'] = 'http://search.roblox.com/catalog/json';
-Roblox.Endpoints.Urls['/catalog/contents'] = 'http://search.roblox.com/catalog/contents';
-Roblox.Endpoints.Urls['/catalog/lists.aspx'] = 'http://www.roblox.com/catalog/lists.aspx';
-Roblox.Endpoints.Urls['/asset-hash-thumbnail/image'] = 'http://assetgame.roblox.com/asset-hash-thumbnail/image';
-Roblox.Endpoints.Urls['/asset-hash-thumbnail/json'] = 'http://assetgame.roblox.com/asset-hash-thumbnail/json';
-Roblox.Endpoints.Urls['/asset-thumbnail-3d/json'] = 'http://assetgame.roblox.com/asset-thumbnail-3d/json';
-Roblox.Endpoints.Urls['/asset-thumbnail/image'] = 'http://assetgame.roblox.com/asset-thumbnail/image';
-Roblox.Endpoints.Urls['/asset-thumbnail/json'] = 'http://assetgame.roblox.com/asset-thumbnail/json';
-Roblox.Endpoints.Urls['/asset-thumbnail/url'] = 'http://assetgame.roblox.com/asset-thumbnail/url';
-Roblox.Endpoints.Urls['/asset/request-thumbnail-fix'] = 'http://assetgame.roblox.com/asset/request-thumbnail-fix';
-Roblox.Endpoints.Urls['/avatar-thumbnail-3d/json'] = 'http://www.roblox.com/avatar-thumbnail-3d/json';
-Roblox.Endpoints.Urls['/avatar-thumbnail/image'] = 'http://www.roblox.com/avatar-thumbnail/image';
-Roblox.Endpoints.Urls['/avatar-thumbnail/json'] = 'http://www.roblox.com/avatar-thumbnail/json';
-Roblox.Endpoints.Urls['/avatar-thumbnails'] = 'http://www.roblox.com/avatar-thumbnails';
-Roblox.Endpoints.Urls['/avatar/request-thumbnail-fix'] = 'http://www.roblox.com/avatar/request-thumbnail-fix';
-Roblox.Endpoints.Urls['/bust-thumbnail/json'] = 'http://www.roblox.com/bust-thumbnail/json';
-Roblox.Endpoints.Urls['/group-thumbnails'] = 'http://www.roblox.com/group-thumbnails';
-Roblox.Endpoints.Urls['/groups/getprimarygroupinfo.ashx'] = 'http://www.roblox.com/groups/getprimarygroupinfo.ashx';
-Roblox.Endpoints.Urls['/headshot-thumbnail/json'] = 'http://www.roblox.com/headshot-thumbnail/json';
-Roblox.Endpoints.Urls['/item-thumbnails'] = 'http://www.roblox.com/item-thumbnails';
-Roblox.Endpoints.Urls['/outfit-thumbnail/json'] = 'http://www.roblox.com/outfit-thumbnail/json';
-Roblox.Endpoints.Urls['/place-thumbnails'] = 'http://www.roblox.com/place-thumbnails';
-Roblox.Endpoints.Urls['/thumbnail/asset/'] = 'http://www.roblox.com/thumbnail/asset/';
-Roblox.Endpoints.Urls['/thumbnail/avatar-headshot'] = 'http://www.roblox.com/thumbnail/avatar-headshot';
-Roblox.Endpoints.Urls['/thumbnail/avatar-headshots'] = 'http://www.roblox.com/thumbnail/avatar-headshots';
-Roblox.Endpoints.Urls['/thumbnail/user-avatar'] = 'http://www.roblox.com/thumbnail/user-avatar';
-Roblox.Endpoints.Urls['/thumbnail/resolve-hash'] = 'http://www.roblox.com/thumbnail/resolve-hash';
-Roblox.Endpoints.Urls['/thumbnail/place'] = 'http://www.roblox.com/thumbnail/place';
-Roblox.Endpoints.Urls['/thumbnail/get-asset-media'] = 'http://www.roblox.com/thumbnail/get-asset-media';
-Roblox.Endpoints.Urls['/thumbnail/remove-asset-media'] = 'http://www.roblox.com/thumbnail/remove-asset-media';
-Roblox.Endpoints.Urls['/thumbnail/set-asset-media-sort-order'] = 'http://www.roblox.com/thumbnail/set-asset-media-sort-order';
-Roblox.Endpoints.Urls['/thumbnail/place-thumbnails'] = 'http://www.roblox.com/thumbnail/place-thumbnails';
-Roblox.Endpoints.Urls['/thumbnail/place-thumbnails-partial'] = 'http://www.roblox.com/thumbnail/place-thumbnails-partial';
-Roblox.Endpoints.Urls['/thumbnail_holder/g'] = 'http://www.roblox.com/thumbnail_holder/g';
-Roblox.Endpoints.Urls['/users/{id}/profile'] = 'http://www.roblox.com/users/{id}/profile';
-Roblox.Endpoints.addCrossDomainOptionsToAllRequests = true;
-</script>
-
-    <script type="text/javascript">
-if (typeof(Roblox) === "undefined") { Roblox = {}; }
-Roblox.Endpoints = Roblox.Endpoints || {};
-Roblox.Endpoints.Urls = Roblox.Endpoints.Urls || {};
-</script>
-
+  <!-- scripts: defer = só rodam depois do HTML carregar, na ordem abaixo -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="./auth.js"></script>
+  <script defer src="./nav.js"></script>
+  <script defer src="./home-auth.js"></script>
+  <script defer src="./icons.js"></script>
 </head>
-<body id="rbx-body"
-      data-performance-relative-value="0.5"
-      data-internal-page-name="Home">
-    <div id="roblox-linkify" data-enabled="true" data-regex="(https?\:\/\/)?(?:www\.)?([a-z0-9\-]{2,}\.)*(((m|de|www|web|api|blog|wiki|help|corp|polls|bloxcon|developer|devforum|forum)\.roblox\.com|robloxlabs\.com)|(www\.shoproblox\.com))((\/[A-Za-z0-9-+&amp;@#\/%?=~_|!:,.;]*)|(\b|\s))" data-regex-flags="gm"></div>
 
-    
-    
+<body id="rbx-body" data-internal-page-name="Home">
+<div id="wrap" class="wrap no-gutter-ads logged-in" data-gutter-ads-enabled="false">
 
-
-<div id="fb-root"></div>
-
-<div id="wrap" class="wrap no-gutter-ads logged-in"
-     data-gutter-ads-enabled="false">
-
-
-<div class="modalPopup unifiedModal smallModal shop-modal shop-modal-item" data-modal-handle="shop-confirmation" style="display: none;">
-    <div class="shop-modal-item-right">
-
-    </div>
-    <div class="shop-modal-item-left">
-        <h2>
-            You are about to visit<br />our shopping site
-        </h2>
-        <div class="body-text">
-            You will be redirected to the shopping<br />site. Please note that you must be 18<br /> or over to buy online.
-        </div>
-        <div class="controls">
-            <a id="rbx-shopping-close-btn" class="btn-shopping-close">Close</a>
-            <div id="rbx-continue-shopping-btn" class="btn btn-medium btn-neutral rbx-btn-secondary-xs btn-more btn-continue-shopping">Continue to Shop</div>
-        </div>
-        <div class="fine-print">
-            The shop is not part of ROBLOX.com and is governed by a separate <a href="http://www.myplay.com/direct/cookie-policy?origin=desktop&permalink=shoproblox">privacy policy</a>.
-        </div>
-    </div>
-</div>
-
-<div id="header"
-     class="navbar-fixed-top rbx-header"
-     role="navigation">
+  <!-- TOPBAR -->
+  <div id="header" class="navbar-fixed-top rbx-header" role="navigation">
     <div class="container-fluid">
-        <div class="rbx-navbar-header">
-            <div data-behavior="nav-notification" class="rbx-nav-collapse" onselectstart="return false;">
-                    <span class="rbx-icon-nav-menu"></span>
-
-                <div class="rbx-nav-notification  rbx-font-xs"
-                     title="1">
-                    1
-                </div>
-
-            </div>
-            <div class="navbar-header">
-                <a class="navbar-brand" href="http://www.roblox.com/"><span class="logo logo-transitional"></span></a>
-            </div>
+      <div class="rbx-navbar-header">
+        <div data-behavior="nav-notification" class="rbx-nav-collapse" onselectstart="return false;">
+          <span class="rbx-icon-nav-menu"></span>
+          <div class="rbx-nav-notification rbx-font-xs" id="nav-notification-badge" style="display:none">0</div>
         </div>
-        <ul class="nav rbx-navbar hidden-xs hidden-sm col-md-4 col-lg-3">
-            <li>
-                <a href="http://www.roblox.com/games">Games</a>
-            </li>
-            <li>
-                <a href="http://www.roblox.com/catalog">Catalog</a>
-            </li>
-            <li>
-                <a href="http://www.roblox.com/develop">Develop</a>
-            </li>
-            <li>
-                <a class="buy-robux" href="https://www.roblox.com/upgrades/robux?ctx=nav">ROBUX</a>
-            </li>
-        </ul><!--rbx-navbar-->
-        <div id="navbar-universal-search" class="navbar-left rbx-navbar-search col-xs-5 col-sm-6 col-md-3" data-behavior="univeral-search" role="search">
-            <div class="input-group rbx-input-group">
-
-                <input id="navbar-search-input" class="form-control rbx-input-field" type="text" placeholder="Search" maxlength="120" />
-                <div class="input-group-btn rbx-input-group-btn">
-                    <button id="navbar-search-btn" class="rbx-input-addon-btn" type="submit">
-                        <span class="rbx-icon-nav-search"></span>
-                    </button>
-                </div>
-            </div>
-            <ul data-toggle="dropdown-menu" class="rbx-dropdown-menu" role="menu">
-                <li class="rbx-navbar-search-option selected" data-searchurl="http://www.roblox.com/search/users?keyword=">
-                    <span class="rbx-navbar-search-text">Search <span class="rbx-navbar-search-string"></span> in People</span>
-                </li>
-                        <li class="rbx-navbar-search-option" data-searchurl="http://www.roblox.com/games/?Keyword=">
-                            <span class="rbx-navbar-search-text">Search <span class="rbx-navbar-search-string"></span> in Games</span>
-                        </li>
-                        <li class="rbx-navbar-search-option" data-searchurl="http://www.roblox.com/catalog/browse.aspx?CatalogContext=1&amp;Keyword=">
-                            <span class="rbx-navbar-search-text">Search <span class="rbx-navbar-search-string"></span> in Catalog</span>
-                        </li>
-                        <li class="rbx-navbar-search-option" data-searchurl="http://www.roblox.com/groups/search.aspx?val=">
-                            <span class="rbx-navbar-search-text">Search <span class="rbx-navbar-search-string"></span> in Groups</span>
-                        </li>
-                        <li class="rbx-navbar-search-option" data-searchurl="http://www.roblox.com/develop/library?CatalogContext=2&amp;Category=6&amp;Keyword=">
-                            <span class="rbx-navbar-search-text">Search <span class="rbx-navbar-search-string"></span> in Library</span>
-                        </li>
-            </ul>
-        </div><!--rbx-navbar-search-->
-        <div class="navbar-right rbx-navbar-right col-xs-4 col-sm-3">
-
-<ul class="nav navbar-right rbx-navbar-icon-group">
-    <li>
-        <a class="rbx-menu-item" data-toggle="popover" data-bind="popover-setting" data-viewport="#header">
-            <span class="rbx-icon-nav-settings" id="nav-settings"></span>
-            <span class="rbx-font-xs nav-setting-highlight hidden">0</span>
-        </a>
-        <div class="rbx-popover-content" data-toggle="popover-setting">
-            <ul class="rbx-dropdown-menu" role="menu">
-                <li>
-                    <a class="rbx-menu-item" href="https://www.roblox.com/my/account">
-                        Settings
-                        <span class="rbx-font-xs nav-setting-highlight hidden">0</span>
-                    </a>
-                </li>
-                <li><a href="http://www.roblox.com/Help/Builderman.aspx" target="_blank">Help</a></li>
-                <li><a data-behavior="logout" data-bind="http://www.roblox.com/authentication/logout">Logout</a></li>
-            </ul>
+        <div class="navbar-header">
+          <a class="navbar-brand" href="./home.html"><span class="logo logo-transitional"></span></a>
         </div>
-    </li>
-    <li>
-        <a class="rbx-menu-item" data-toggle="popover" data-bind="popover-tix" data-viewport="#header">
-            <span class="rbx-icon-nav-tix" id="nav-tix"></span>
-            <span class="rbx-text-navbar-right" id="nav-tix-amount">60</span>
-        </a>
-        <div class="rbx-popover-content" data-toggle="popover-tix">
-            <ul class="rbx-dropdown-menu" role="menu">
-                <li><a href="http://www.roblox.com/My/Money.aspx#/#Summary_tab" id="nav-tix-balance">60 Tickets</a></li>
-                <li><a href="http://www.roblox.com/my/money.aspx?tab=TradeCurrency">Trade Currency</a></li>
-            </ul>
-        </div>
-    </li>
-    <li>
-        <a id="nav-robux-icon" class="rbx-menu-item" data-toggle="popover" data-bind="popover-robux">
-            <span class="rbx-icon-nav-robux" id="nav-robux"></span>
-            <span class="rbx-text-navbar-right" id="nav-robux-amount">0</span>
-        </a>
-        <div class="rbx-popover-content" data-toggle="popover-robux">
-            <ul class="rbx-dropdown-menu" role="menu">
-                <li><a href="http://www.roblox.com/My/Money.aspx#/#Summary_tab" id="nav-robux-balance">0 ROBUX</a></li>
-                <li><a href="https://www.roblox.com/upgrades/robux?ctx=navpopover">Buy ROBUX</a></li>
-            </ul>
-        </div>
-    </li>
-    <li class="rbx-navbar-right-search" data-toggle="toggle-search">
-        <a class="rbx-menu-icon">
-            <span class="rbx-icon-nav-search-white"></span>
-        </a>
-    </li>
-</ul>        </div><!-- navbar right-->
-        <ul class="nav rbx-navbar hidden-md hidden-lg col-xs-12">
-            <li>
-                <a href="http://www.roblox.com/games">Games</a>
-            </li>
-            <li>
-                <a href="http://www.roblox.com/catalog/">Catalog</a>
-            </li>
-            <li>
-                <a href="http://www.roblox.com/develop">Develop</a>
-            </li>
-            <li>
-                <a class="buy-robux" href="https://www.roblox.com/upgrades/robux?ctx=nav">ROBUX</a>
-            </li>
-        </ul><!--rbx-navbar-->
-    </div>
-</div>
+      </div>
 
+      <ul class="nav rbx-navbar hidden-xs hidden-sm col-md-4 col-lg-3">
+        <li><a href="./games.html">Games</a></li>
+        <li><a href="./catalog.html">Catalog</a></li>
+        <li><a href="#">Develop</a></li>
+        <li><a class="buy-robux" href="#">ROBUX</a></li>
+      </ul>
 
-<!-- LEFT NAV MENU -->
-    <div id="navigation" class="rbx-left-col" data-behavior="left-col">
-        <ul>
-            <li class="rbx-lead">
-                <a href="http://www.roblox.com/users/62402235/profile">ConnerMurphy07</a>
-            </li>
-            <li class="rbx-divider"></li>
+      <div id="navbar-universal-search" class="navbar-left rbx-navbar-search col-xs-5 col-sm-6 col-md-3" data-behavior="univeral-search" role="search">
+        <div class="input-group rbx-input-group">
+          <input id="navbar-search-input" class="form-control rbx-input-field" type="text" placeholder="Search" maxlength="120">
+          <div class="input-group-btn rbx-input-group-btn">
+            <button id="navbar-search-btn" class="rbx-input-addon-btn" type="submit">
+              <span class="rbx-icon-nav-search"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-right rbx-navbar-right col-xs-4 col-sm-3">
+        <ul class="nav navbar-right rbx-navbar-icon-group">
+          <li>
+            <a class="rbx-menu-item" id="nav-settings-link" href="#">
+              <span class="rbx-icon-nav-settings" id="nav-settings"></span>
+            </a>
+          </li>
+          <li>
+            <a class="rbx-menu-item" href="#">
+              <span class="rbx-icon-nav-tix" id="nav-tix"></span>
+              <span class="rbx-text-navbar-right" id="nav-tix-amount">0</span>
+            </a>
+          </li>
+          <li>
+            <a id="nav-robux-icon" class="rbx-menu-item" href="#">
+              <span class="rbx-icon-nav-robux" id="nav-robux"></span>
+              <span class="rbx-text-navbar-right" id="nav-robux-amount">0</span>
+            </a>
+          </li>
+          <li class="rbx-navbar-right-search" data-toggle="toggle-search">
+            <a class="rbx-menu-icon"><span class="rbx-icon-nav-search-white"></span></a>
+          </li>
         </ul>
+      </div>
 
-        <div class="rbx-scrollbar" data-toggle="scrollbar" onselectstart="return false;">
-            <ul>
-                <li><a href="http://www.roblox.com/home" id="nav-home"><span class="rbx-icon-nav-home"></span><span>Home</span></a></li>
-                <li><a href="http://www.roblox.com/users/62402235/profile" id="nav-profile"><span class="rbx-icon-nav-profile"></span><span>Profile</span></a></li>
-                <li>
-                    <a href="http://www.roblox.com/my/messages/#!/inbox" id="nav-message" data-count="1">
-                        <span class="rbx-icon-nav-message"></span><span>Messages</span>
-                        <span class="rbx-highlight" title="1">1</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://www.roblox.com/users/62402235/friends" id="nav-friends" data-count="0">
-                        <span class="rbx-icon-nav-friends"></span><span>Friends</span>
-                        <span class="rbx-highlight" title="0"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://www.roblox.com/my/character.aspx" id="nav-character">
-                        <span class="rbx-icon-nav-charactercustomizer"></span><span>Character</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://www.roblox.com/users/62402235/inventory" id="nav-inventory">
-                        <span class="rbx-icon-nav-inventory"></span><span>Inventory</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://www.roblox.com/my/money.aspx#/#TradeItems_tab" id="nav-trade">
-                        <span class="rbx-icon-nav-trade"></span><span>Trade</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://www.roblox.com/my/groups.aspx" id="nav-group">
-                        <span class="rbx-icon-nav-group"></span><span>Groups</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://forum.roblox.com/forum/" id="nav-forum">
-                        <span class="rbx-icon-nav-forum"></span><span>Forum</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://blog.roblox.com" id="nav-blog">
-                        <span class="rbx-icon-nav-blog"></span><span>Blog</span>
-                    </a>
-                </li>
-                    <li>
-                        <a href="http://www.shoproblox.com/" id="nav-shop" class="roblox-shop-interstitial">
-                            <span class="rbx-icon-nav-shop"></span><span>Shop</span>
-                        </a>
-                    </li>
-                <li class="rbx-upgrade-now">
-                    <a href="https://www.roblox.com/premium/membership?ctx=leftnav" class="rbx-btn-secondary-xs" id="upgrade-now-button">Upgrade Now</a>
-                </li>
-                    <li class="rbx-text-notes rbx-font-bold rbx-font-sm">
-                        Events
-                    </li>
-                        <li class="rbx-nav-sponsor" ng-non-bindable>
-                            <a class="menu-item" href="http://www.roblox.com/sponsored/HotelTransylvania2" title="HotelTransylvania2">
-                                    <img src="http://images.rbxcdn.com/962c773f58467b1dfdcaba07afdc128b" />
-                            </a>
-                        </li>
-                        <li class="rbx-nav-sponsor" ng-non-bindable>
-                            <a class="menu-item" href="http://www.roblox.com/sponsored/ROBLOXHoliday2015" title="ROBLOXHoliday2015">
-                                    <img src="http://images.rbxcdn.com/d941e51fbaf7649b7f930d2aeb6baab4" />
-                            </a>
-                        </li>
-            </ul>
-        </div>
+      <ul class="nav rbx-navbar hidden-md hidden-lg col-xs-12">
+        <li><a href="./games.html">Games</a></li>
+        <li><a href="./catalog.html">Catalog</a></li>
+        <li><a href="#">Develop</a></li>
+        <li><a class="buy-robux" href="#">ROBUX</a></li>
+      </ul>
     </div>
-    <div class="container-main    ">
-            <script type="text/javascript">
-                if (top.location != self.location) {
-                    top.location = self.location.href;
-                }
-            </script>
-        <noscript><div class="SystemAlert"><div class="rbx-alert-info" role="alert">Please enable Javascript to use all the features on this site.</div></div></noscript>
-        <div class="content  ">
+  </div>
 
-                            <div id="Skyscraper-Adp-Left" class="abp abp-container left-abp">
-                    
+  <!-- MENU ESQUERDO -->
+  <div id="navigation" class="rbx-left-col" data-behavior="left-col">
+    <ul>
+      <li class="rbx-lead">
+        <a href="#" id="nav-username"></a>
+      </li>
+      <li class="rbx-divider"></li>
+    </ul>
+    <div class="rbx-scrollbar" data-toggle="scrollbar" onselectstart="return false;">
+      <ul>
+        <li><a href="./home.html" id="nav-home"><span class="rbx-icon-nav-home"></span><span>Home</span></a></li>
+        <li><a href="#" id="nav-profile"><span class="rbx-icon-nav-profile"></span><span>Profile</span></a></li>
+        <li><a href="#" id="nav-friends"><span class="rbx-icon-nav-friends"></span><span>Friends</span></a></li>
+        <li><a href="#" id="nav-character"><span class="rbx-icon-nav-charactercustomizer"></span><span>Character</span></a></li>
+        <li><a href="#" id="nav-inventory"><span class="rbx-icon-nav-inventory"></span><span>Inventory</span></a></li>
+        <li><a href="./games.html" id="nav-games"><span class="rbx-icon-nav-games"></span><span>Games</span></a></li>
+        <li><a href="./catalog.html" id="nav-catalog"><span class="rbx-icon-nav-shop"></span><span>Catalog</span></a></li>
+      </ul>
+    </div>
+  </div>
 
-    <iframe allowtransparency="true"
-            frameborder="0"
-            height="612"
-            scrolling="no"
-            src="http://www.roblox.com/userads/2"
-            width="160"
-            data-js-adtype="iframead"></iframe>
+  <!-- CONTEUDO -->
+  <div class="container-main">
+    <div class="content">
 
-                </div>
-                        
+      <div id="HomeContainer" class="row home-container">
 
-
-<div id="HomeContainer" class="row home-container"
-     data-facebook-share=""
-     data-update-status-url="/home/updatestatus"
-     data-should-show-enable-two-step-verification-call-to-action=False>
-
-    <div class="col-xs-12 home-header">
-        <div class="home-header-content non-bc">
+        <!-- Hello, username (sem nick fixo; home-auth.js preenche #home-username) -->
+        <div class="col-xs-12 home-header">
+          <div class="home-header-content non-bc">
             <h1>
-                <a href="#">Hello, <span id="home-username" class="rbx-preload">&nbsp;</span>!</a>
+              <a href="#" id="home-profile-link">Hello, <span id="home-username" class="rbx-preload">&nbsp;</span>!</a>
             </h1>
+          </div>
         </div>
-    </div>
 
-    <div class="col-xs-12 section home-friends" id="home-friends">
-        <div class="container-header">
-            <h3>Friends (<span id="friends-count">0</span>)</h3>
-            <form id="add-friend-form" style="display:inline-block;margin-left:10px" autocomplete="off">
-                <input id="add-friend-input" type="text" placeholder="Add friend by username" maxlength="20">
-                <button type="submit" class="rbx-btn-secondary-xs">Add</button>
-                <span id="add-friend-msg" class="rbx-text-notes rbx-font-sm"></span>
-            </form>
+        <!-- AMIGOS (vazio por padrao; so aparece quem o jogador adicionar) -->
+        <div class="col-xs-12 section home-friends" id="home-friends">
+          <div class="container-header">
+            <h3>Friends (<span id="friend-count">0</span>)</h3>
+            <a href="#" class="rbx-btn-secondary-xs btn-more">See All</a>
+          </div>
+          <ul class="hlist friend-list" id="friend-list"></ul>
+          <p id="friend-empty">You have no friends yet.</p>
+          <div id="add-friend-box">
+            <input id="add-friend-input" class="form-control rbx-input-field" type="text" placeholder="Username" maxlength="30" style="display:inline-block;width:200px;">
+            <a id="add-friend-btn" class="rbx-btn-secondary-xs">Add Friend</a>
+            <span id="add-friend-msg" class="rbx-text-notes rbx-font-sm"></span>
+          </div>
         </div>
-        <ul class="hlist friend-list" id="friend-list"></ul>
-    </div>
 
-
+        <!-- RECENTLY PLAYED (renderizado pelo script no final) -->
         <div id="recently-visited-places" class="col-xs-12 container-list home-games">
-            <div class="container-header">
-                <h3>Recently Played</h3>
-<a  href="http://www.roblox.com/games?sortFilter=6" class="rbx-btn-secondary-xs btn-more">See All</a>            </div>
-            
-
-<ul class="hlist game-list">
-
-
-<li class="list-item card game">
-    <a href="http://www.roblox.com/games/refer?SortFilter=6&amp;PlaceId=192800&amp;Position=1&amp;PageType=Home" class="card-item game-item">
-        <span class="card-thumb-content game-thumb-content">
-            <span class="card-thumb-wrapper game-thumb-wrapper"
-                  >
-                <img class="card-thumb game-thumb" src="http://t5.rbxcdn.com/0c5503cd5865fd9bdfb8a6b2f95113e1" alt="[Pets] Work at a Pizza Place"
-                     thumbnail='{"Final":true,"Url":"http://t5.rbxcdn.com/0c5503cd5865fd9bdfb8a6b2f95113e1","RetryUrl":null}' image-retry />
-            </span>
-        </span>
-        <span class="rbx-text-overflow rbx-game-title card-title" title="[Pets] Work at a Pizza Place" ng-non-bindable>
-            [Pets] Work at a Pizza Place
-        </span>
-        <span class="rbx-game-text-notes rbx-font-xs card-text-notes">
-            8,739 Playing
-        </span>
-        <span class="rbx-votes">
-            <div class="vote-bar">
-                <div class="thumbs-up">
-                    <span class="rbx-icon-thumbs-up"></span>
-                </div>
-                <div class="voting-container"
-                     data-upvotes="145696"
-                     data-downvotes="10553"
-                     data-voting-processed="false">
-                    <div class="background "></div>
-                    <div class="votes"></div>
-                    <div class="mask">
-                        <div class="segment seg-one"></div>
-                        <div class="segment seg-two"></div>
-                        <div class="segment seg-three"></div>
-                        <div class="segment seg-four"></div>
-                    </div>
-                </div>
-                <div class="thumbs-down">
-                    <span class="rbx-icon-thumbs-down"></span>
-                </div>
-            </div>
-            <div class="vote-counts">
-                <div class="down-votes-count rbx-font-xs">10,553</div>
-                <div class="up-votes-count rbx-font-xs">145,696</div>
-
-            </div>
-        </span>
-        <span class="rbx-text-overflow rbx-developer rbx-font-xs">
-            by <cite class="rbx-link-sm" data-href="http://www.roblox.com/users/82471/profile">Dued1</cite>
-        </span>
-    </a>
-</li>
-
-
-
-<li class="list-item card game">
-    <a href="http://www.roblox.com/games/refer?SortFilter=6&amp;PlaceId=19549795&amp;Position=2&amp;PageType=Home" class="card-item game-item">
-        <span class="card-thumb-content game-thumb-content">
-            <span class="card-thumb-wrapper game-thumb-wrapper"
-                  >
-                <img class="card-thumb game-thumb" src="http://t7.rbxcdn.com/03970ddd5fbc1082343be99e0a4a5c5a" alt="Call of Robloxia 5 - Roblox at War [ Halted ]"
-                     thumbnail='{"Final":true,"Url":"http://t7.rbxcdn.com/03970ddd5fbc1082343be99e0a4a5c5a","RetryUrl":null}' image-retry />
-            </span>
-        </span>
-        <span class="rbx-text-overflow rbx-game-title card-title" title="Call of Robloxia 5 - Roblox at War [ Halted ]" ng-non-bindable>
-            Call of Robloxia 5 - Roblox at War [ Hal
-        </span>
-        <span class="rbx-game-text-notes rbx-font-xs card-text-notes">
-            190 Playing
-        </span>
-        <span class="rbx-votes">
-            <div class="vote-bar">
-                <div class="thumbs-up">
-                    <span class="rbx-icon-thumbs-up"></span>
-                </div>
-                <div class="voting-container"
-                     data-upvotes="54432"
-                     data-downvotes="6178"
-                     data-voting-processed="false">
-                    <div class="background "></div>
-                    <div class="votes"></div>
-                    <div class="mask">
-                        <div class="segment seg-one"></div>
-                        <div class="segment seg-two"></div>
-                        <div class="segment seg-three"></div>
-                        <div class="segment seg-four"></div>
-                    </div>
-                </div>
-                <div class="thumbs-down">
-                    <span class="rbx-icon-thumbs-down"></span>
-                </div>
-            </div>
-            <div class="vote-counts">
-                <div class="down-votes-count rbx-font-xs">6,178</div>
-                <div class="up-votes-count rbx-font-xs">54,432</div>
-
-            </div>
-        </span>
-        <span class="rbx-text-overflow rbx-developer rbx-font-xs">
-            by <cite class="rbx-link-sm" data-href="http://www.roblox.com/users/5725475/profile">litozinnamon</cite>
-        </span>
-    </a>
-</li>
-
-
-
-<li class="list-item card game">
-    <a href="http://www.roblox.com/games/refer?SortFilter=6&amp;PlaceId=19597016&amp;Position=3&amp;PageType=Home" class="card-item game-item">
-        <span class="card-thumb-content game-thumb-content">
-            <span class="card-thumb-wrapper game-thumb-wrapper"
-                  >
-                <img class="card-thumb game-thumb" src="http://t0.rbxcdn.com/9d72d71928246648451fd170a0230e0e" alt="Hide n&#39; Seek XL-Living Spaces"
-                     thumbnail='{"Final":true,"Url":"http://t0.rbxcdn.com/9d72d71928246648451fd170a0230e0e","RetryUrl":null}' image-retry />
-            </span>
-        </span>
-        <span class="rbx-text-overflow rbx-game-title card-title" title="Hide n&#39; Seek XL-Living Spaces" ng-non-bindable>
-            Hide n&#39; Seek XL-Living Spaces
-        </span>
-        <span class="rbx-game-text-notes rbx-font-xs card-text-notes">
-            57 Playing
-        </span>
-        <span class="rbx-votes">
-            <div class="vote-bar">
-                <div class="thumbs-up">
-                    <span class="rbx-icon-thumbs-up"></span>
-                </div>
-                <div class="voting-container"
-                     data-upvotes="12564"
-                     data-downvotes="885"
-                     data-voting-processed="false">
-                    <div class="background "></div>
-                    <div class="votes"></div>
-                    <div class="mask">
-                        <div class="segment seg-one"></div>
-                        <div class="segment seg-two"></div>
-                        <div class="segment seg-three"></div>
-                        <div class="segment seg-four"></div>
-                    </div>
-                </div>
-                <div class="thumbs-down">
-                    <span class="rbx-icon-thumbs-down"></span>
-                </div>
-            </div>
-            <div class="vote-counts">
-                <div class="down-votes-count rbx-font-xs">885</div>
-                <div class="up-votes-count rbx-font-xs">12,564</div>
-
-            </div>
-        </span>
-        <span class="rbx-text-overflow rbx-developer rbx-font-xs">
-            by <cite class="rbx-link-sm" data-href="http://www.roblox.com/users/5707426/profile">TwoShue</cite>
-        </span>
-    </a>
-</li>
-
-
-
-<li class="list-item card game">
-    <a href="http://www.roblox.com/games/refer?SortFilter=6&amp;PlaceId=143964432&amp;Position=4&amp;PageType=Home" class="card-item game-item">
-        <span class="card-thumb-content game-thumb-content">
-            <span class="card-thumb-wrapper game-thumb-wrapper"
-                  >
-                <img class="card-thumb game-thumb" src="http://t2.rbxcdn.com/f0520bd7b143936b96cf8091921682d7" alt="Adopt and Raise a Cute Baby (Reindeer)"
-                     thumbnail='{"Final":true,"Url":"http://t2.rbxcdn.com/f0520bd7b143936b96cf8091921682d7","RetryUrl":null}' image-retry />
-            </span>
-        </span>
-        <span class="rbx-text-overflow rbx-game-title card-title" title="Adopt and Raise a Cute Baby (Reindeer)" ng-non-bindable>
-            Adopt and Raise a Cute Baby (Reindeer)
-        </span>
-        <span class="rbx-game-text-notes rbx-font-xs card-text-notes">
-            2,194 Playing
-        </span>
-        <span class="rbx-votes">
-            <div class="vote-bar">
-                <div class="thumbs-up">
-                    <span class="rbx-icon-thumbs-up"></span>
-                </div>
-                <div class="voting-container"
-                     data-upvotes="29987"
-                     data-downvotes="6718"
-                     data-voting-processed="false">
-                    <div class="background "></div>
-                    <div class="votes"></div>
-                    <div class="mask">
-                        <div class="segment seg-one"></div>
-                        <div class="segment seg-two"></div>
-                        <div class="segment seg-three"></div>
-                        <div class="segment seg-four"></div>
-                    </div>
-                </div>
-                <div class="thumbs-down">
-                    <span class="rbx-icon-thumbs-down"></span>
-                </div>
-            </div>
-            <div class="vote-counts">
-                <div class="down-votes-count rbx-font-xs">6,718</div>
-                <div class="up-votes-count rbx-font-xs">29,987</div>
-
-            </div>
-        </span>
-        <span class="rbx-text-overflow rbx-developer rbx-font-xs">
-            by <cite class="rbx-link-sm" data-href="http://www.roblox.com/users/47791115/profile">Tremity</cite>
-        </span>
-    </a>
-</li>
-
-
-
-<li class="list-item card game">
-    <a href="http://www.roblox.com/games/refer?SortFilter=6&amp;PlaceId=118874386&amp;Position=5&amp;PageType=Home" class="card-item game-item">
-        <span class="card-thumb-content game-thumb-content">
-            <span class="card-thumb-wrapper game-thumb-wrapper"
-                  >
-                <img class="card-thumb game-thumb" src="http://t5.rbxcdn.com/5c2112f14461b40d487ca6efeede61fb" alt="Adopt And Raise A Baby (GamePasses)"
-                     thumbnail='{"Final":true,"Url":"http://t5.rbxcdn.com/5c2112f14461b40d487ca6efeede61fb","RetryUrl":null}' image-retry />
-            </span>
-        </span>
-        <span class="rbx-text-overflow rbx-game-title card-title" title="Adopt And Raise A Baby (GamePasses)" ng-non-bindable>
-            Adopt And Raise A Baby (GamePasses)
-        </span>
-        <span class="rbx-game-text-notes rbx-font-xs card-text-notes">
-            344 Playing
-        </span>
-        <span class="rbx-votes">
-            <div class="vote-bar">
-                <div class="thumbs-up">
-                    <span class="rbx-icon-thumbs-up"></span>
-                </div>
-                <div class="voting-container"
-                     data-upvotes="14711"
-                     data-downvotes="4257"
-                     data-voting-processed="false">
-                    <div class="background "></div>
-                    <div class="votes"></div>
-                    <div class="mask">
-                        <div class="segment seg-one"></div>
-                        <div class="segment seg-two"></div>
-                        <div class="segment seg-three"></div>
-                        <div class="segment seg-four"></div>
-                    </div>
-                </div>
-                <div class="thumbs-down">
-                    <span class="rbx-icon-thumbs-down"></span>
-                </div>
-            </div>
-            <div class="vote-counts">
-                <div class="down-votes-count rbx-font-xs">4,257</div>
-                <div class="up-votes-count rbx-font-xs">14,711</div>
-
-            </div>
-        </span>
-        <span class="rbx-text-overflow rbx-developer rbx-font-xs">
-            by <cite class="rbx-link-sm" data-href="http://www.roblox.com/users/19455331/profile">KingAndrewK</cite>
-        </span>
-    </a>
-</li>
-
-
-
-<li class="list-item card game">
-    <a href="http://www.roblox.com/games/refer?SortFilter=6&amp;PlaceId=267684517&amp;Position=6&amp;PageType=Home" class="card-item game-item">
-        <span class="card-thumb-content game-thumb-content">
-            <span class="card-thumb-wrapper game-thumb-wrapper"
-                  >
-                <img class="card-thumb game-thumb" src="http://t5.rbxcdn.com/4353bd5f933183e7c1343cdf816a6c6e" alt="Survive Life As An EGG NEW"
-                     thumbnail='{"Final":true,"Url":"http://t5.rbxcdn.com/4353bd5f933183e7c1343cdf816a6c6e","RetryUrl":null}' image-retry />
-            </span>
-        </span>
-        <span class="rbx-text-overflow rbx-game-title card-title" title="Survive Life As An EGG NEW" ng-non-bindable>
-            Survive Life As An EGG {NEW}
-        </span>
-        <span class="rbx-game-text-notes rbx-font-xs card-text-notes">
-            882 Playing
-        </span>
-        <span class="rbx-votes">
-            <div class="vote-bar">
-                <div class="thumbs-up">
-                    <span class="rbx-icon-thumbs-up"></span>
-                </div>
-                <div class="voting-container"
-                     data-upvotes="2784"
-                     data-downvotes="4281"
-                     data-voting-processed="false">
-                    <div class="background "></div>
-                    <div class="votes"></div>
-                    <div class="mask">
-                        <div class="segment seg-one"></div>
-                        <div class="segment seg-two"></div>
-                        <div class="segment seg-three"></div>
-                        <div class="segment seg-four"></div>
-                    </div>
-                </div>
-                <div class="thumbs-down">
-                    <span class="rbx-icon-thumbs-down"></span>
-                </div>
-            </div>
-            <div class="vote-counts">
-                <div class="down-votes-count rbx-font-xs">4,281</div>
-                <div class="up-votes-count rbx-font-xs">2,784</div>
-
-            </div>
-        </span>
-        <span class="rbx-text-overflow rbx-developer rbx-font-xs">
-            by <cite class="rbx-link-sm" data-href="http://www.roblox.com/groups/group.aspx?gid=2615795">Ty Studio</cite>
-        </span>
-    </a>
-</li>
-
-</ul>
+          <div class="container-header">
+            <h3>Recently Played</h3>
+            <a href="./games.html" class="rbx-btn-secondary-xs btn-more">See All</a>
+          </div>
+          <ul class="hlist game-list" id="recent-games-list"></ul>
         </div>
 
-
+        <!-- FRIEND ACTIVITY -->
         <div id="friend-activity" class="col-xs-12 container-list home-games">
-            <div class="container-header">
-                <h3>Friend Activity</h3>
-<a  href="http://www.roblox.com/games?sortFilter=17" class="rbx-btn-secondary-xs btn-more">See All</a>            </div>
-            
-
-<ul class="hlist game-list">
-
-
-<li class="list-item card game">
-    <a href="http://www.roblox.com/games/refer?SortFilter=17&amp;PlaceId=180529147&amp;Position=1&amp;PageType=Home" class="card-item game-item">
-        <span class="card-thumb-content game-thumb-content">
-            <span class="card-thumb-wrapper game-thumb-wrapper"
-                  >
-                <img class="card-thumb game-thumb" src="http://t1.rbxcdn.com/e5e3ac63d63f46092c07d2e121451f4f" alt="################&#39;# Place ######: 8"
-                     thumbnail='{"Final":true,"Url":"http://t1.rbxcdn.com/e5e3ac63d63f46092c07d2e121451f4f","RetryUrl":null}' image-retry />
-            </span>
-        </span>
-        <span class="rbx-text-overflow rbx-game-title card-title" title="################&#39;# Place ######: 8" ng-non-bindable>
-            ################&#39;# Place ######: 8
-        </span>
-        <span class="rbx-game-text-notes rbx-font-xs card-text-notes">
-            2 Playing
-        </span>
-        <span class="rbx-votes">
-            <div class="vote-bar">
-                <div class="thumbs-up">
-                    <span class="rbx-icon-thumbs-up"></span>
-                </div>
-                <div class="voting-container"
-                     data-upvotes="0"
-                     data-downvotes="0"
-                     data-voting-processed="false">
-                    <div class="background no-votes"></div>
-                    <div class="votes"></div>
-                    <div class="mask">
-                        <div class="segment seg-one"></div>
-                        <div class="segment seg-two"></div>
-                        <div class="segment seg-three"></div>
-                        <div class="segment seg-four"></div>
-                    </div>
-                </div>
-                <div class="thumbs-down">
-                    <span class="rbx-icon-thumbs-down"></span>
-                </div>
-            </div>
-            <div class="vote-counts">
-                <div class="down-votes-count rbx-font-xs">0</div>
-                <div class="up-votes-count rbx-font-xs">0</div>
-
-            </div>
-        </span>
-        <span class="rbx-text-overflow rbx-developer rbx-font-xs">
-            by <cite class="rbx-link-sm" data-href="http://www.roblox.com/users/66080720/profile">TheDarkForceRising</cite>
-        </span>
-    </a>
-</li>
-
-
-
-<li class="list-item card game">
-    <a href="http://www.roblox.com/games/refer?SortFilter=17&amp;PlaceId=192800&amp;Position=2&amp;PageType=Home" class="card-item game-item">
-        <span class="card-thumb-content game-thumb-content">
-            <span class="card-thumb-wrapper game-thumb-wrapper"
-                  >
-                <img class="card-thumb game-thumb" src="http://t5.rbxcdn.com/0c5503cd5865fd9bdfb8a6b2f95113e1" alt="[Pets] Work at a Pizza Place"
-                     thumbnail='{"Final":true,"Url":"http://t5.rbxcdn.com/0c5503cd5865fd9bdfb8a6b2f95113e1","RetryUrl":null}' image-retry />
-            </span>
-        </span>
-        <span class="rbx-text-overflow rbx-game-title card-title" title="[Pets] Work at a Pizza Place" ng-non-bindable>
-            [Pets] Work at a Pizza Place
-        </span>
-        <span class="rbx-game-text-notes rbx-font-xs card-text-notes">
-            8,739 Playing
-        </span>
-        <span class="rbx-votes">
-            <div class="vote-bar">
-                <div class="thumbs-up">
-                    <span class="rbx-icon-thumbs-up"></span>
-                </div>
-                <div class="voting-container"
-                     data-upvotes="145696"
-                     data-downvotes="10553"
-                     data-voting-processed="false">
-                    <div class="background "></div>
-                    <div class="votes"></div>
-                    <div class="mask">
-                        <div class="segment seg-one"></div>
-                        <div class="segment seg-two"></div>
-                        <div class="segment seg-three"></div>
-                        <div class="segment seg-four"></div>
-                    </div>
-                </div>
-                <div class="thumbs-down">
-                    <span class="rbx-icon-thumbs-down"></span>
-                </div>
-            </div>
-            <div class="vote-counts">
-                <div class="down-votes-count rbx-font-xs">10,553</div>
-                <div class="up-votes-count rbx-font-xs">145,696</div>
-
-            </div>
-        </span>
-        <span class="rbx-text-overflow rbx-developer rbx-font-xs">
-            by <cite class="rbx-link-sm" data-href="http://www.roblox.com/users/82471/profile">Dued1</cite>
-        </span>
-    </a>
-</li>
-
-
-
-<li class="list-item card game">
-    <a href="http://www.roblox.com/games/refer?SortFilter=17&amp;PlaceId=211991549&amp;Position=3&amp;PageType=Home" class="card-item game-item">
-        <span class="card-thumb-content game-thumb-content">
-            <span class="card-thumb-wrapper game-thumb-wrapper"
-                  >
-                <img class="card-thumb game-thumb" src="http://t3.rbxcdn.com/3f5071841205880ac04b553381260504" alt="Zombie Outbreak Survival!"
-                     thumbnail='{"Final":true,"Url":"http://t3.rbxcdn.com/3f5071841205880ac04b553381260504","RetryUrl":null}' image-retry />
-            </span>
-        </span>
-        <span class="rbx-text-overflow rbx-game-title card-title" title="Zombie Outbreak Survival!" ng-non-bindable>
-            Zombie Outbreak Survival!
-        </span>
-        <span class="rbx-game-text-notes rbx-font-xs card-text-notes">
-            575 Playing
-        </span>
-        <span class="rbx-votes">
-            <div class="vote-bar">
-                <div class="thumbs-up">
-                    <span class="rbx-icon-thumbs-up"></span>
-                </div>
-                <div class="voting-container"
-                     data-upvotes="8272"
-                     data-downvotes="3138"
-                     data-voting-processed="false">
-                    <div class="background "></div>
-                    <div class="votes"></div>
-                    <div class="mask">
-                        <div class="segment seg-one"></div>
-                        <div class="segment seg-two"></div>
-                        <div class="segment seg-three"></div>
-                        <div class="segment seg-four"></div>
-                    </div>
-                </div>
-                <div class="thumbs-down">
-                    <span class="rbx-icon-thumbs-down"></span>
-                </div>
-            </div>
-            <div class="vote-counts">
-                <div class="down-votes-count rbx-font-xs">3,138</div>
-                <div class="up-votes-count rbx-font-xs">8,272</div>
-
-            </div>
-        </span>
-        <span class="rbx-text-overflow rbx-developer rbx-font-xs">
-            by <cite class="rbx-link-sm" data-href="http://www.roblox.com/users/30031949/profile">xXFIREFACEXx</cite>
-        </span>
-    </a>
-</li>
-
-
-
-<li class="list-item card game">
-    <a href="http://www.roblox.com/games/refer?SortFilter=17&amp;PlaceId=137877687&amp;Position=4&amp;PageType=Home" class="card-item game-item">
-        <span class="card-thumb-content game-thumb-content">
-            <span class="card-thumb-wrapper game-thumb-wrapper"
-                  >
-                <img class="card-thumb game-thumb" src="http://t1.rbxcdn.com/8466580bb6366de2f6f7f3263f0715f9" alt="RoCitizens"
-                     thumbnail='{"Final":true,"Url":"http://t1.rbxcdn.com/8466580bb6366de2f6f7f3263f0715f9","RetryUrl":null}' image-retry />
-            </span>
-        </span>
-        <span class="rbx-text-overflow rbx-game-title card-title" title="RoCitizens" ng-non-bindable>
-            RoCitizens
-        </span>
-        <span class="rbx-game-text-notes rbx-font-xs card-text-notes">
-            4,567 Playing
-        </span>
-        <span class="rbx-votes">
-            <div class="vote-bar">
-                <div class="thumbs-up">
-                    <span class="rbx-icon-thumbs-up"></span>
-                </div>
-                <div class="voting-container"
-                     data-upvotes="47553"
-                     data-downvotes="6254"
-                     data-voting-processed="false">
-                    <div class="background "></div>
-                    <div class="votes"></div>
-                    <div class="mask">
-                        <div class="segment seg-one"></div>
-                        <div class="segment seg-two"></div>
-                        <div class="segment seg-three"></div>
-                        <div class="segment seg-four"></div>
-                    </div>
-                </div>
-                <div class="thumbs-down">
-                    <span class="rbx-icon-thumbs-down"></span>
-                </div>
-            </div>
-            <div class="vote-counts">
-                <div class="down-votes-count rbx-font-xs">6,254</div>
-                <div class="up-votes-count rbx-font-xs">47,553</div>
-
-            </div>
-        </span>
-        <span class="rbx-text-overflow rbx-developer rbx-font-xs">
-            by <cite class="rbx-link-sm" data-href="http://www.roblox.com/users/2217098/profile">Firebrand1</cite>
-        </span>
-    </a>
-</li>
-
-
-
-<li class="list-item card game">
-    <a href="http://www.roblox.com/games/refer?SortFilter=17&amp;PlaceId=316419762&amp;Position=5&amp;PageType=Home" class="card-item game-item">
-        <span class="card-thumb-content game-thumb-content">
-            <span class="card-thumb-wrapper game-thumb-wrapper"
-                  >
-                <img class="card-thumb game-thumb" src="http://t7.rbxcdn.com/6d8186d300b56b46147ddd6ee5a9e254" alt="Kart Testing Tech Demo"
-                     thumbnail='{"Final":true,"Url":"http://t7.rbxcdn.com/6d8186d300b56b46147ddd6ee5a9e254","RetryUrl":null}' image-retry />
-            </span>
-        </span>
-        <span class="rbx-text-overflow rbx-game-title card-title" title="Kart Testing Tech Demo" ng-non-bindable>
-            Kart Testing Tech Demo
-        </span>
-        <span class="rbx-game-text-notes rbx-font-xs card-text-notes">
-            20 Playing
-        </span>
-        <span class="rbx-votes">
-            <div class="vote-bar">
-                <div class="thumbs-up">
-                    <span class="rbx-icon-thumbs-up"></span>
-                </div>
-                <div class="voting-container"
-                     data-upvotes="6556"
-                     data-downvotes="629"
-                     data-voting-processed="false">
-                    <div class="background "></div>
-                    <div class="votes"></div>
-                    <div class="mask">
-                        <div class="segment seg-one"></div>
-                        <div class="segment seg-two"></div>
-                        <div class="segment seg-three"></div>
-                        <div class="segment seg-four"></div>
-                    </div>
-                </div>
-                <div class="thumbs-down">
-                    <span class="rbx-icon-thumbs-down"></span>
-                </div>
-            </div>
-            <div class="vote-counts">
-                <div class="down-votes-count rbx-font-xs">629</div>
-                <div class="up-votes-count rbx-font-xs">6,556</div>
-
-            </div>
-        </span>
-        <span class="rbx-text-overflow rbx-developer rbx-font-xs">
-            by <cite class="rbx-link-sm" data-href="http://www.roblox.com/users/8002766/profile">LeitrisArcade</cite>
-        </span>
-    </a>
-</li>
-
-
-
-<li class="list-item card game">
-    <a href="http://www.roblox.com/games/refer?SortFilter=17&amp;PlaceId=163487707&amp;Position=6&amp;PageType=Home" class="card-item game-item">
-        <span class="card-thumb-content game-thumb-content">
-            <span class="card-thumb-wrapper game-thumb-wrapper"
-                  >
-                <img class="card-thumb game-thumb" src="http://t1.rbxcdn.com/345b864127160169cd4cc2e27b452155" alt="Murderer Tycoon"
-                     thumbnail='{"Final":true,"Url":"http://t1.rbxcdn.com/345b864127160169cd4cc2e27b452155","RetryUrl":null}' image-retry />
-            </span>
-        </span>
-        <span class="rbx-text-overflow rbx-game-title card-title" title="Murderer Tycoon" ng-non-bindable>
-            Murderer Tycoon
-        </span>
-        <span class="rbx-game-text-notes rbx-font-xs card-text-notes">
-            4 Playing
-        </span>
-        <span class="rbx-votes">
-            <div class="vote-bar">
-                <div class="thumbs-up">
-                    <span class="rbx-icon-thumbs-up"></span>
-                </div>
-                <div class="voting-container"
-                     data-upvotes="287"
-                     data-downvotes="83"
-                     data-voting-processed="false">
-                    <div class="background "></div>
-                    <div class="votes"></div>
-                    <div class="mask">
-                        <div class="segment seg-one"></div>
-                        <div class="segment seg-two"></div>
-                        <div class="segment seg-three"></div>
-                        <div class="segment seg-four"></div>
-                    </div>
-                </div>
-                <div class="thumbs-down">
-                    <span class="rbx-icon-thumbs-down"></span>
-                </div>
-            </div>
-            <div class="vote-counts">
-                <div class="down-votes-count rbx-font-xs">83</div>
-                <div class="up-votes-count rbx-font-xs">287</div>
-
-            </div>
-        </span>
-        <span class="rbx-text-overflow rbx-developer rbx-font-xs">
-            by <cite class="rbx-link-sm" data-href="http://www.roblox.com/users/55732820/profile">xSajmon</cite>
-        </span>
-    </a>
-</li>
-
-</ul>
+          <div class="container-header">
+            <h3>Friend Activity</h3>
+            <a href="./games.html" class="rbx-btn-secondary-xs btn-more">See All</a>
+          </div>
+          <ul class="hlist game-list" id="friend-activity-list"></ul>
+          <p id="friend-activity-empty" class="empty-note">Your friends' activity will show up here.</p>
         </div>
 
-
-    <div class="col-xs-12 col-sm-6 home-right-col">
-
-        <div class="section">
+        <div class="col-xs-12 col-sm-6 home-right-col">
+          <div class="section">
             <div class="section-header">
-                <h3>Blog News</h3>
-                <a  href="http://blog.roblox.com" class="rbx-btn-control-xs btn-more">See More</a>
+              <h3>Blog News</h3>
+              <a href="#" class="rbx-btn-control-xs btn-more">See More</a>
             </div>
-            
-<ul class="blog-news">
-            <li class="news">
+            <ul class="blog-news">
+              <li class="news">
                 <span class="rbx-icon-page"></span>
-                <span class="news-link"><a href="http://blog.roblox.com/2015/12/an-update-on-roblox-on-xbox-one/" ref="news-article" class="rbx-link rbx-article-title">An Update on ROBLOX on Xbox One</a></span>
-            </li>
-            <li class="news">
-                <span class="rbx-icon-page"></span>
-                <span class="news-link"><a href="http://blog.roblox.com/2015/12/hotel-transylvania-2-returns/" ref="news-article" class="rbx-link rbx-article-title">Hotel Transylvania 2 Returns!</a></span>
-            </li>
-
-</ul>
+                <span class="news-link"><a href="#" class="rbx-link rbx-article-title">Welcome to Brasil16</a></span>
+              </li>
+            </ul>
+          </div>
         </div>
-            </div><!-- .home-right-col -->
 
-    <div class="col-xs-12 col-sm-6 home-left-col">
-        <div class="section">
+        <div class="col-xs-12 col-sm-6 home-left-col">
+          <div class="section">
             <div class="section-header">
-                <h3>My Feed</h3>
+              <h3>My Feed</h3>
             </div>
             <div class="rbx-form-horizontal" id="statusForm" role="form">
-                <div class="rbx-form-group">
-                    <input class="form-control rbx-input-field" id="txtStatusMessage" maxlength="254" placeholder="What are you up to?" value="########## ########## ########## HES AWESOME YOU KNOW THAT ##########!!!!" />
-                    <p class="rbx-control-label">Status update failed.</p>
-                </div>
-                <a  type="button" class="rbx-btn-primary-sm" id="shareButton">Share</a>
-                <img id="loadingImage" class="share-login" style="display: none" alt="Sharing..." src="http://images.rbxcdn.com/ec4e85b0c4396cf753a06fade0a8d8af.gif" height="17" width="48" />
+              <div class="rbx-form-group">
+                <input class="form-control rbx-input-field" id="txtStatusMessage" maxlength="254" placeholder="What are you up to?" value="">
+                <p class="rbx-control-label" id="status-error" style="display:none">Status update failed.</p>
+              </div>
+              <a type="button" class="rbx-btn-primary-sm" id="shareButton">Share</a>
             </div>
-            
+            <ul class="vlist feeds" id="feed-list"></ul>
+            <p id="feed-empty" class="empty-note">Nothing in your feed yet.</p>
+          </div>
+        </div>
 
-<ul class="vlist feeds">
-        <li class="list-item">
+      </div><!-- /#HomeContainer -->
+    </div><!-- /.content -->
+  </div><!-- /.container-main -->
 
-<a href="http://www.roblox.com/My/Groups.aspx?gid=977619" class="list-header" ><img  class='header-thumb' src='http://t2.rbxcdn.com/e99c285d695363866e8bdd1de1117d98' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=977619'>Dunkin&#39; Donuts &#174;</a><div class='feedtext linkify'>"{QoTD}Apple or Samsung?[ANN] Merry Christmas Eve Dunkin&#39; Donuts!"</div> (posted by <a href='http://www.roblox.com/users/57498564/profile' class='rbx-title'>Fuzzness</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/24/2015 at 7:45 AM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111276572&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
+  <footer class="container-footer">
+    <div class="footer">
+      <ul class="row footer-links">
+        <li class="col-xs-4 col-sm-2 footer-link"><a href="#"><h2>About Us</h2></a></li>
+        <li class="col-xs-4 col-sm-2 footer-link"><a href="#"><h2>Jobs</h2></a></li>
+        <li class="col-xs-4 col-sm-2 footer-link"><a href="#"><h2>Blog</h2></a></li>
+        <li class="col-xs-4 col-sm-2 footer-link"><a href="#"><h2>Privacy</h2></a></li>
+        <li class="col-xs-4 col-sm-2 footer-link"><a href="#"><h2>Parents</h2></a></li>
+        <li class="col-xs-4 col-sm-2 footer-link"><a href="#"><h2>Help</h2></a></li>
+      </ul>
+      <p class="footer-note">
+        BRASIL16 is a fan-made project and is not affiliated with ROBLOX Corporation.
+      </p>
+    </div>
+  </footer>
 
-<a href="http://www.roblox.com/My/Groups.aspx?gid=2649944" class="list-header" ><img  class='header-thumb' src='http://t0.rbxcdn.com/0c8bec68f1650d61dd777364c80eb3aa' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=2649944'>Keystone Middle School</a><div class='feedtext linkify'>"2[OS]  2[SUBS] 3[TAs]  1[Girls Gym Teacher]  1[Guidance]  1[Music Teacher] APPLY HERE-http://www.roblox.com/games/331018630/KM"</div> (posted by <a href='http://www.roblox.com/users/92652951/profile' class='rbx-title'>KeystoneMiddleSchool</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/24/2015 at 7:17 AM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111275532&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
+</div><!-- /#wrap -->
 
-<a href="http://www.roblox.com/My/Groups.aspx?gid=1227426" class="list-header" ><img  class='header-thumb' src='http://t7.rbxcdn.com/37869fcdacf92dcd0e8c55f200c34383' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=1227426'>Shake Shack &#174;</a><div class='feedtext linkify'>"[ANN] We are having Human Resources applications for the New Year! We are hoping to be more active as we hit our one year mark of being on Roblox! http://forum.roblox.com/Forum/ShowPost.aspx?PostID=180218270 | QoTD; What are you doing on Christmas Eve?"</div> (posted by <a href='http://www.roblox.com/users/46256661/profile' class='rbx-title'>estetica</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 11:06 PM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111263249&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
+<script>
+  // Renderiza os cards de "Recently Played" a partir de uma lista (edite aqui).
+  (function () {
+    var RECENT_GAMES = [
+      { id: 192800,   title: '[Pets] Work at a Pizza Place',        playing: 8739, up: 145696, down: 10553, dev: 'Dued1' },
+      { id: 19549795, title: 'Call of Robloxia 5 - Roblox at War',  playing: 190,  up: 54432,  down: 6178,  dev: 'litozinnamon' },
+      { id: 19597016, title: "Hide n' Seek XL-Living Spaces",       playing: 57,   up: 12564,  down: 885,   dev: 'TwoShue' }
+    ];
 
-<a href="http://www.roblox.com/My/Groups.aspx?gid=977619" class="list-header" ><img  class='header-thumb' src='http://t2.rbxcdn.com/e99c285d695363866e8bdd1de1117d98' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=977619'>Dunkin&#39; Donuts &#174;</a><div class='feedtext linkify'>"[Interviews] Are over. Come on down to the Cafe for a nice cup of coffee! (:"</div> (posted by <a href='http://www.roblox.com/users/55133823/profile' class='rbx-title'>EveIynx3</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 8:05 PM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111253731&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+    function fmt(n) { return Number(n).toLocaleString('en-US'); }
 
-<a href="http://www.roblox.com/My/Groups.aspx?gid=1227426" class="list-header" ><img  class='header-thumb' src='http://t7.rbxcdn.com/37869fcdacf92dcd0e8c55f200c34383' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=1227426'>Shake Shack &#174;</a><div class='feedtext linkify'>"Please keep in mind that not everyone gets a job here at Shake Shack. We have specific qualifications that we have to check as we read your application. Thanks for understanding. | Qotd; Are you excited for Christmas?"</div> (posted by <a href='http://www.roblox.com/users/73165255/profile' class='rbx-title'>Snowfxll</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 7:02 PM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111249658&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
+    function card(g) {
+      var total = g.up + g.down;
+      var pct = total ? Math.round(g.up / total * 100) : 0;
+      return '' +
+        '<li class="list-item card game">' +
+          '<a href="./games.html?id=' + encodeURIComponent(g.id) + '" class="card-item game-item">' +
+            '<span class="card-thumb-content game-thumb-content">' +
+              '<span class="card-thumb-wrapper game-thumb-wrapper"></span>' +
+            '</span>' +
+            '<span class="rbx-text-overflow rbx-game-title card-title" title="' + esc(g.title) + '">' + esc(g.title) + '</span>' +
+            '<span class="rbx-game-text-notes rbx-font-xs card-text-notes">' + fmt(g.playing) + ' Playing</span>' +
+            '<span class="rbx-votes">' +
+              '<div class="vote-bar">' +
+                '<div class="thumbs-up"><span class="rbx-icon-thumbs-up"></span></div>' +
+                '<div class="voting-container">' +
+                  '<div class="background' + (total ? '' : ' no-votes') + '"></div>' +
+                  '<div class="votes" style="width:' + pct + '%"></div>' +
+                '</div>' +
+                '<div class="thumbs-down"><span class="rbx-icon-thumbs-down"></span></div>' +
+              '</div>' +
+              '<div class="vote-counts">' +
+                '<div class="down-votes-count rbx-font-xs">' + fmt(g.down) + '</div>' +
+                '<div class="up-votes-count rbx-font-xs">' + fmt(g.up) + '</div>' +
+              '</div>' +
+            '</span>' +
+            '<span class="rbx-text-overflow rbx-developer rbx-font-xs">by <cite class="rbx-link-sm">' + esc(g.dev) + '</cite></span>' +
+          '</a>' +
+        '</li>';
+    }
 
-<a href="http://www.roblox.com/My/Groups.aspx?gid=977619" class="list-header" ><img  class='header-thumb' src='http://t2.rbxcdn.com/e99c285d695363866e8bdd1de1117d98' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=977619'>Dunkin&#39; Donuts &#174;</a><div class='feedtext linkify'>"[Interviews] Are beginning soon. (IA+ needed)."</div> (posted by <a href='http://www.roblox.com/users/55133823/profile' class='rbx-title'>EveIynx3</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 6:59 PM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111249418&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
-
-<a href="http://www.roblox.com/My/Groups.aspx?gid=2649944" class="list-header" ><img  class='header-thumb' src='http://t0.rbxcdn.com/0c8bec68f1650d61dd777364c80eb3aa' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=2649944'>Keystone Middle School</a><div class='feedtext linkify'>"[BREAK]See you Jan 4th 2016!It has been a great Year KMS :D [STAFF]http://www.roblox.com/games/325095861/K"</div> (posted by <a href='http://www.roblox.com/users/65059046/profile' class='rbx-title'>PastelMoonsss</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 5:10 PM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111241832&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
-
-<a href="http://www.roblox.com/My/Groups.aspx?gid=2649944" class="list-header" ><img  class='header-thumb' src='http://t0.rbxcdn.com/0c8bec68f1650d61dd777364c80eb3aa' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=2649944'>Keystone Middle School</a><div class='feedtext linkify'>"[BREAK]See you Jan 4th 2016!It has been a great Year KMS :D"</div> (posted by <a href='http://www.roblox.com/users/65059046/profile' class='rbx-title'>PastelMoonsss</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 5:00 PM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111241068&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
-
-<a href="http://www.roblox.com/My/Groups.aspx?gid=977619" class="list-header" ><img  class='header-thumb' src='http://t2.rbxcdn.com/e99c285d695363866e8bdd1de1117d98' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=977619'>Dunkin&#39; Donuts &#174;</a><div class='feedtext linkify'>"[Interviews] Over, it was very crowded! See you at 2am GMT/9pm EST for the next session. Head to the cafe for a nice latte! [QoTD] Favourite superhero?"</div> (posted by <a href='http://www.roblox.com/users/22406320/profile' class='rbx-title'>SirYouMe</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 4:02 PM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111236567&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
-
-<a href="http://www.roblox.com/My/Groups.aspx?gid=2649944" class="list-header" ><img  class='header-thumb' src='http://t0.rbxcdn.com/0c8bec68f1650d61dd777364c80eb3aa' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=2649944'>Keystone Middle School</a><div class='feedtext linkify'>"HEAD DOWN :D http://www.roblox.com/games/292628125/KeyStone-Middle-School-KMS"</div> (posted by <a href='http://www.roblox.com/users/92652951/profile' class='rbx-title'>KeystoneMiddleSchool</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 4:01 PM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111236465&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
-
-<a href="http://www.roblox.com/My/Groups.aspx?gid=977619" class="list-header" ><img  class='header-thumb' src='http://t2.rbxcdn.com/e99c285d695363866e8bdd1de1117d98' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=977619'>Dunkin&#39; Donuts &#174;</a><div class='feedtext linkify'>"[Interviews] At 9pm GMT / 4pm EST. Head down now to get a good spot! [QoTD] Favourite superhero?"</div> (posted by <a href='http://www.roblox.com/users/22406320/profile' class='rbx-title'>SirYouMe</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 2:23 PM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111228898&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
-
-<a href="http://www.roblox.com/My/Groups.aspx?gid=2580112" class="list-header" ><img  class='header-thumb' src='http://t3.rbxcdn.com/8352db909f439aae472112e81b5cf1b5' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=2580112'>The Robloxian General Hospital</a><div class='feedtext linkify'>"[SHOUTLOCK] [SUPERVISORS] Congrats to those who managed to pass! See them here: http://forum.roblox.com/Forum/ShowPost.aspx?PostID=180179218 [APPLICATION] Closed. Thank you for sending in your applications. They will be reviewed over the holidays."</div> (posted by <a href='http://www.roblox.com/users/12295233/profile' class='rbx-title'>Zingzang456</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 1:33 PM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111225229&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
-
-<a href="http://www.roblox.com/My/Groups.aspx?gid=2580112" class="list-header" ><img  class='header-thumb' src='http://t3.rbxcdn.com/8352db909f439aae472112e81b5cf1b5' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=2580112'>The Robloxian General Hospital</a><div class='feedtext linkify'>"[APPLICATION] Closed. Thank you for sending in your applications. They will be reviewed over the holidays. Reopen - 28/12/15! [SUPERVISOR APPS] Announcing at 7.30pm GMT (15mins)!"</div> (posted by <a href='http://www.roblox.com/users/12295233/profile' class='rbx-title'>Zingzang456</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 1:14 PM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111223810&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
-
-<a href="http://www.roblox.com/My/Groups.aspx?gid=2580112" class="list-header" ><img  class='header-thumb' src='http://t3.rbxcdn.com/8352db909f439aae472112e81b5cf1b5' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=2580112'>The Robloxian General Hospital</a><div class='feedtext linkify'>"[UPDATE ][APPLICATION] http://www.roblox.com/games/329197170/The- (Remember! The Application will close TODAY 7pm GMT till 28/12/15 at 8pm GMT, to give us a break over christmas. All current applications WILL be read) 10 mins to go!"</div> (posted by <a href='http://www.roblox.com/users/12295233/profile' class='rbx-title'>Zingzang456</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 12:47 PM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111221947&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
-
-<a href="http://www.roblox.com/My/Groups.aspx?gid=977619" class="list-header" ><img  class='header-thumb' src='http://t2.rbxcdn.com/e99c285d695363866e8bdd1de1117d98' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=977619'>Dunkin&#39; Donuts &#174;</a><div class='feedtext linkify'>"[Interviews] Over, sorry if you couldn&#39;t make it. Go head to the cafe for a nice Latte! [QoTD] Favorite superhero?"</div> (posted by <a href='http://www.roblox.com/users/55660154/profile' class='rbx-title'>raminab12</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 12:37 PM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111221217&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
-
-<a href="http://www.roblox.com/My/Groups.aspx?gid=977619" class="list-header" ><img  class='header-thumb' src='http://t2.rbxcdn.com/e99c285d695363866e8bdd1de1117d98' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=977619'>Dunkin&#39; Donuts &#174;</a><div class='feedtext linkify'>"[Interviews] Over. Head to the cafe for some nice hot chocolate :D. [QoTD] Who is your favourite superhero? [DNOS] ST+ can host interviews whenever, but still do scheduled ones."</div> (posted by <a href='http://www.roblox.com/users/22406320/profile' class='rbx-title'>SirYouMe</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 10:37 AM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111213244&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
-
-<a href="http://www.roblox.com/My/Groups.aspx?gid=2580112" class="list-header" ><img  class='header-thumb' src='http://t3.rbxcdn.com/8352db909f439aae472112e81b5cf1b5' /></a>
-            <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=2580112'>The Robloxian General Hospital</a><div class='feedtext linkify'>"[APPLICATION] http://www.roblox.com/games/329197170/The- (Remember! The Application will close TODAY 8pm GMT till 28/12/15 at 8pm GMT, to give us a break over christmas. All current applications WILL be read)"</div> (posted by <a href='http://www.roblox.com/users/12295233/profile' class='rbx-title'>Zingzang456</a>)</p>
-                <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 10:19 AM</span>
-                    <a href="http://www.roblox.com/abusereport/Feed?id=111212157&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
-                        <span class="rbx-icon-report"></span>
-                    </a>
-            </div>
-        </li>
-        <li class="list-item">
-
-<a href="
+    var list = document.getElementById('recent-games-list');
+    if (list) list.innerHTML = RECENT_GAMES.map(card).join('');
+  })();
+</script>
+</body>
+</html>
