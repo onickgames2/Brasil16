@@ -41,6 +41,17 @@
   #friend-list .friend-remove:hover { color: #d33; }
   #friend-empty { padding: 10px 0; color: #777; }
   #add-friend-msg { margin-left: 8px; }
+
+  /* logo da topbar (somente PC) */
+  @media (min-width: 768px) {
+    #header .navbar-brand .logo {
+      display: block;
+      width: 160px;   /* ajuste conforme o tamanho da sua logo */
+      height: 32px;
+      background: url('https://files.catbox.moe/8e4d8m.png') no-repeat left center !important;
+      background-size: contain !important;
+    }
+  }
 </style>
 
   </head>
@@ -1906,13 +1917,4 @@ Roblox.Endpoints.Urls = Roblox.Endpoints.Urls || {};
                        ng-model="dialogData.searchTerm" />
             </div>
             <button id="friends-selection-btn"
-                    class="rbx-btn-secondary-xs friends-invite-btn"
-                    ng-disabled="dialogLayout.inviteBtnDisabled"
-                    ng-click="sendInvite()">
-                Invite
-            </button>
-        </div>
-
-        <div id="scrollbar_friend_{{dialogData.dialogType}}_{{dialogData.layoutId}}" class="rbx-scrollbar chat-friend-list"
-             friends-lazy-load>
-           
+                    class="rbx-btn-secondary-xs f
