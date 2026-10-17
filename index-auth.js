@@ -1,13 +1,16 @@
 (function () {
-  // 1) Já tem conta logada? Nem mostra a página, vai direto pro home
-  if (Auth.currentUser()) {
-    document.documentElement.style.display = "none";
-    location.replace("home.html");
-    return;
-  }
-
   var $ = function (id) { return document.getElementById(id); };
   var gender = null;
+
+  // 1) Já tem conta logada? Esconde a página e vai pro home
+  document.documentElement.style.display = "none";
+  Auth.ready.then(function () {
+    if (Auth.currentUser()) {
+      location.replace("home.html");
+    } else {
+      document.documentElement.style.display = "";
+    }
+  });
 
   function setMsg(id, texto) {
     var el = $(id);
@@ -61,7 +64,7 @@
 
     var r = await Auth.register(u, p);
     if (r.ok) {
-      location.href = "home.html"; // conta criada -> home
+      location.href = "home.html";
     } else {
       setMsg("GeneralErrorText", r.msg);
     }
@@ -76,7 +79,7 @@
     else alert(r.msg);
   }
 
-  // Captura os eventos ANTES do Angular/Roblox e bloqueia o envio pro servidor deles
+  // Captura os eventos ANTES do Angular/Roblox
   document.addEventListener("click", function (e) {
     if (e.target.closest("#signup-button")) {
       e.preventDefault(); e.stopPropagation();
@@ -96,7 +99,6 @@
       e.preventDefault(); e.stopPropagation();
       return;
     }
-    // Enter nos campos do cadastro
     if (e.key === "Enter" && e.target.closest &&
         e.target.closest("#signup-username, #signup-password, #signup-password-confirm")) {
       e.preventDefault(); e.stopPropagation();
