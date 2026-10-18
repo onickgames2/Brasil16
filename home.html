@@ -12,23 +12,7 @@
 <script src="./icons.js"></script>
 
 <style>
-  /* pedidos de amizade */
-  #friend-requests { margin-bottom: 15px; }
-  .request-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; flex-wrap: wrap; }
-  .request-name { font-weight: 600; flex: 1 1 160px; }
-  #request-sent { color: #777; margin-top: 4px; }
-
-  /* feed */
-  .feed-avatar {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 40px; height: 40px; background: #e1e1e1; color: #555;
-    font-weight: 700; border-radius: 4px;
-  }
-  .feed-delete { cursor: pointer; color: #999; font-size: 12px; margin-left: 8px; }
-  .feed-delete:hover { color: #d33; }
-  .feed-empty { padding: 10px 0; color: #777; list-style: none; }
-	
-   /* remove a foto de perfil ao lado do nick */
+  /* remove a foto de perfil ao lado do nick */
   .home-thumbnail-bust { display: none !important; }
   .home-header-content { margin-left: 0 !important; padding-left: 0 !important; }
 
@@ -57,6 +41,31 @@
   #friend-list .friend-remove:hover { color: #d33; }
   #friend-empty { padding: 10px 0; color: #777; }
   #add-friend-msg { margin-left: 8px; }
+
+  /* Novos estilos para os ícones e logos personalizados */
+  .rbx-icon-nav-menu {
+    background-image: url('https://files.catbox.moe/1awj2a.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+  }
+
+  .rbx-icon-nav-settings {
+    background-image: url('https://files.catbox.moe/08wel3.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+  }
+
+  .navbar-brand .logo {
+    background-image: url('https://files.catbox.moe/8e4d8m.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    width: 120px !important;
+    height: 30px !important;
+    display: inline-block !important;
+  }
 </style>
 
   </head>
@@ -1403,7 +1412,7 @@ Roblox.Endpoints.Urls = Roblox.Endpoints.Urls || {};
 
 <a href="http://www.roblox.com/My/Groups.aspx?gid=977619" class="list-header" ><img  class='header-thumb' src='http://t2.rbxcdn.com/e99c285d695363866e8bdd1de1117d98' /></a>
             <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=977619'>Dunkin&#39; Donuts &#174;</a><div class='feedtext linkify'>"[Interviews] At 9pm GMT / 4pm EST. Head down now to get a good spot! [QoTD] Favourite superhero?"</div> (posted by <a href='http://www.roblox.com/users/22406320/profile' class='rbx-title'>SirYouMe</a>)</p>
+                <p class="list-content"><a href='http://www.roblox.com/My/Groups.aspx?gid=977619'>Dunkin&#39; Donuts &#174;</a><div class='feedtext linkify'>"[Interviews] At 9pm GMT / 4pm EST. Head down now to get a good spot! [QoTD] Favourite superhero?"</div> (posted by <a href='http://www.roblox.com/users/22406320/profile' class='rbx-title'>SirYouMe</a>)</p>
                 <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 2:23 PM</span>
                     <a href="http://www.roblox.com/abusereport/Feed?id=111228898&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
                         <span class="rbx-icon-report"></span>
@@ -1480,7 +1489,7 @@ Roblox.Endpoints.Urls = Roblox.Endpoints.Urls || {};
 
 <a href="http://www.roblox.com/My/Groups.aspx?gid=977619" class="list-header" ><img  class='header-thumb' src='http://t2.rbxcdn.com/e99c285d695363866e8bdd1de1117d98' /></a>
             <div class="list-body">
-                <p class="list-content"><a href='http://www.roblox.com/my/groups.aspx?gid=977619'>Dunkin&#39; Donuts &#174;</a><div class='feedtext linkify'>"[INTERVIEWS] Are in 1 hour! Head down to the interview center to get a good spot I&#39;m hosting :). QOTDWho is your favourite superhero? [READ] ST+ Can host interviews when they wish, but still do the given times."</div> (posted by <a href='http://www.roblox.com/users/66260583/profile' class='rbx-title'>xX1Flash1Xx</a>)</p>
+                <p class="list-content"><a href='http://www.roblox.com/My/Groups.aspx?gid=977619'>Dunkin&#39; Donuts &#174;</a><div class='feedtext linkify'>"[INTERVIEWS] Are in 1 hour! Head down to the interview center to get a good spot I&#39;m hosting :). QOTDWho is your favourite superhero? [READ] ST+ Can host interviews when they wish, but still do the given times."</div> (posted by <a href='http://www.roblox.com/users/66260583/profile' class='rbx-title'>xX1Flash1Xx</a>)</p>
                 <span class="rbx-text-notes rbx-font-sm">12/23/2015 at 8:23 AM</span>
                     <a href="http://www.roblox.com/abusereport/Feed?id=111206345&amp;redirectUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">
                         <span class="rbx-icon-report"></span>
@@ -2375,412 +2384,4 @@ Roblox.Endpoints.Urls = Roblox.Endpoints.Urls || {};
                 ROBLOX is now loading. Get ready to play!
             </p>
             <div class="ph-startingdialog-spinner-row">
-                <img src="http://images.rbxcdn.com/4bed93c91f909002b1f17f05c0ce13d1.gif" width="82" height="24" />
-            </div>
-        </div>
-    </div>
-</div>
-<div id="ProtocolHandlerAreYouInstalled" style="display:none;">
-    <div class="modalPopup ph-modal-popup">
-        <div class="ph-modal-header">
-            <span class="rbx-icon-close simplemodal-close"></span>
-        </div>
-        <div class="ph-logo-row">
-            <img src="/images/Logo/logo_R.svg" width="90" height="90" alt="R" />
-        </div>
-        <div class="ph-areyouinstalleddialog-content">
-            <p class="larger-font-size">
-                You're moments away from getting into the game!
-            </p>
-            <div>
-                <button type="button" class="btn rbx-btn-primary-sm" id="ProtocolHandlerInstallButton">
-                    Download and Install ROBLOX
-                </button>
-            </div>
-            <div class="rbx-small rbx-text-notes">
-                <a href="https://en.help.roblox.com/hc/en-us/articles/204473560" class="rbx-link" target="_blank">Click here for help</a>
-            </div>
-
-        </div>
-    </div>
-</div>
-<div id="ProtocolHandlerClickAlwaysAllowed" class="ph-clickalwaysallowed" style="display:none;">
-    <p class="larger-font-size">
-        <span class="rbx-icon-moreinfo"></span>
-        Check <b>Remember my choice</b> and click <img src="http://images.rbxcdn.com/7c8d7a39b4335931221857cca2b5430b.png" alt="Launch Application" />  in the dialog box above to join games faster in the future!
-    </p>
-</div>
-
-
-    <div id="videoPrerollPanel" style="display:none">
-        <div id="videoPrerollTitleDiv">
-            Gameplay sponsored by:
-        </div>
-        <div id="content">
-            <video id="contentElement" style="width:0; height:0;" />
-        </div>
-        <div id="videoPrerollMainDiv"></div>
-        <div id="videoPrerollCompanionAd">
-            
-                <script type="text/javascript">
-                    googletag.cmd.push(function () {
-                        googletag.defineSlot('/1015347/VideoPrerollUnder13', [300, 250], 'videoPrerollCompanionAd')
-                            .addService(googletag.companionAds());
-                        googletag.enableServices();
-                        googletag.display('videoPrerollCompanionAd');
-                    });
-                </script>
-        </div>
-        <div id="videoPrerollLoadingDiv">
-            Loading <span id="videoPrerollLoadingPercent">0%</span> - <span id="videoPrerollMadStatus" class="MadStatusField">Starting game...</span><span id="videoPrerollMadStatusBackBuffer" class="MadStatusBackBuffer"></span>
-            <div id="videoPrerollLoadingBar">
-                <div id="videoPrerollLoadingBarCompleted">
-                </div>
-            </div>
-        </div>
-        <div id="videoPrerollJoinBC">
-            <span>Get more with Builders Club!</span>
-            <a href="https://www.roblox.com/premium/membership?ctx=preroll" target="_blank" class="btn-medium btn-primary" id="videoPrerollJoinBCButton">Join Builders Club</a>
-        </div>
-    </div>   
-        <script type="text/javascript" src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            var videoPreRollDFP = Roblox.VideoPreRollDFP;
-            if (videoPreRollDFP) {
-                var customTargeting = Roblox.VideoPreRollDFP.customTargeting;
-                videoPreRollDFP.showVideoPreRoll = true;
-                videoPreRollDFP.loadingBarMaxTime = 33000;
-                videoPreRollDFP.videoLoadingTimeout = 11000;
-                videoPreRollDFP.videoPlayingTimeout = 41000;
-                videoPreRollDFP.videoLogNote = "";
-                videoPreRollDFP.logsEnabled = true;
-                videoPreRollDFP.excludedPlaceIds = "32373412";
-                videoPreRollDFP.adUnit = "/1015347/VideoPrerollUnder13";
-                videoPreRollDFP.adTime = 15;
-                videoPreRollDFP.isSwfPreloaderEnabled = true;
-                videoPreRollDFP.isPrerollShownEveryXMinutesEnabled = true;
-                customTargeting.userAge = "9";
-                customTargeting.userGender = "Male";
-                customTargeting.gameGenres = "";
-                customTargeting.environment = "Production";
-                customTargeting.adTime = "15";
-                customTargeting.PLVU = false;
-                $(videoPreRollDFP.checkEligibility);
-            }
-        });
-    </script>                                                     
-
-
-<div id="GuestModePrompt_BoyGirl" class="Revised GuestModePromptModal" style="display:none;">
-    <div class="simplemodal-close">
-        <a class="ImageButton closeBtnCircle_20h" style="cursor: pointer; margin-left:455px;top:7px; position:absolute;"></a>
-    </div>
-    <div class="Title">
-        Choose Your Character
-    </div>
-    <div style="min-height: 275px; background-color: white;">
-        <div style="clear:both; height:25px;"></div>
-
-        <div style="text-align: center;">
-            <div class="VisitButtonsGuestCharacter VisitButtonBoyGuest" style="float:left; margin-left:45px;"></div>
-            <div class="VisitButtonsGuestCharacter VisitButtonGirlGuest" style="float:right; margin-right:45px;"></div>
-        </div>
-        <div style="clear:both; height:25px;"></div>
-        <div class="RevisedFooter">
-            <div style="width:200px;margin:10px auto 0 auto;">
-                <a href="http://www.roblox.com/?returnUrl=http%3A%2F%2Fwww.roblox.com%2Fhome"><div class="RevisedCharacterSelectSignup"></div></a>
-                <a class="HaveAccount" href="https://www.roblox.com/newlogin?returnUrl=http%3A%2F%2Fwww.roblox.com%2Fhome">I have an account</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script type="text/javascript">
-    function checkRobloxInstall() {
-             return RobloxLaunch.CheckRobloxInstall('/install/download.aspx');
-    }
-
-</script>
-
-    <div id="InstallationInstructions" style="display:none;">
-        <div class="ph-installinstructions">
-            <div class="ph-modal-header">
-                <span class="rbx-icon-close simplemodal-close"></span>
-                <h3>Thanks for playing ROBLOX</h3>
-            </div>
-            <div class="ph-installinstructions-body">
-                    <div class="ph-install-step ph-installinstructions-step1-of4">
-                        <h1>1</h1>
-                        <p class="larger-font-size">Click RobloxPlayerLauncher.exe to run the ROBLOX installer, which just downloaded via your web browser.</p>
-                        <img width="230" height="180" src="http://images.rbxcdn.com/8b0052e4ff81d8e14f19faff2a22fcf7.png" />
-                    </div>
-                    <div class="ph-install-step ph-installinstructions-step2-of4">
-                        <h1>2</h1>
-                        <p class="larger-font-size">Click <strong>Run</strong> when prompted by your computer to begin the installation process.</p>
-                        <img width="230" height="180" src="http://images.rbxcdn.com/4a3f96d30df0f7879abde4ed837446c6.png" />
-                    </div>
-                    <div class="ph-install-step ph-installinstructions-step3-of4">
-                        <h1>3</h1>
-                        <p class="larger-font-size">Click <strong>Ok</strong> once you've successfully installed ROBLOX.</p>
-                        <img width="230" height="180" src="http://images.rbxcdn.com/6e23e4971ee146e719fb1abcb1d67d59.png" />
-                    </div>
-                    <div class="ph-install-step ph-installinstructions-step4-of4">
-                        <h1>4</h1>
-                        <p class="larger-font-size">After installation, click <strong>Play</strong> below to join the action!</p>
-                        <div class="VisitButton VisitButtonContinuePH">
-                            <a class="btn rbx-btn-primary-lg disabled">Play</a>
-                        </div>
-                    </div>
-            </div>
-            <div class="rbx-font-sm rbx-text-notes">
-                The ROBLOX installer should download shortly. If it doesn’t, <a href="#" onclick="Roblox.ProtocolHandlerClientInterface.startDownload(); return false;">start the download now.</a>
-            </div>
-        </div>
-    </div>
-    <div class="InstallInstructionsImage" data-modalwidth="970" style="display:none;"></div>
-
-
-
-<div id="pluginObjDiv" style="height:1px;width:1px;visibility:hidden;position: absolute;top: 0;"></div>
-<iframe id="downloadInstallerIFrame" style="visibility:hidden;height:0;width:1px;position:absolute"></iframe>
-
-<script type='text/javascript' src='http://js.rbxcdn.com/6b9fed5e91a508780b95c302464d62ef.js.gzip'></script>
-
-<script type="text/javascript">
-    Roblox.Client._skip = null;
-    Roblox.Client._CLSID = '76D50904-6780-4c8b-8986-1A7EE0B1716D';
-    Roblox.Client._installHost = 'setup.roblox.com';
-    Roblox.Client.ImplementsProxy = true;
-    Roblox.Client._silentModeEnabled = true;
-    Roblox.Client._bringAppToFrontEnabled = false;
-    Roblox.Client._currentPluginVersion = '';
-    Roblox.Client._eventStreamLoggingEnabled = true;
-
-        
-        Roblox.Client._installSuccess = function() {
-            if(GoogleAnalyticsEvents){
-                GoogleAnalyticsEvents.ViewVirtual('InstallSuccess');
-                GoogleAnalyticsEvents.FireEvent(['Plugin','Install Success']);
-                if (Roblox.Client._eventStreamLoggingEnabled && typeof Roblox.GamePlayEvents != "undefined") {
-                    Roblox.GamePlayEvents.SendInstallSuccess(Roblox.Client._launchMode, play_placeId);
-                }
-            }
-        }
-        
-            
-        if ((window.chrome || window.safari) && window.location.hash == '#chromeInstall') {
-            window.location.hash = '';
-            var continuation = '(' + $.cookie('chromeInstall') + ')';
-            play_placeId = $.cookie('chromeInstallPlaceId');
-            Roblox.GamePlayEvents.lastContext = $.cookie('chromeInstallLaunchMode');
-            $.cookie('chromeInstallPlaceId', null);
-            $.cookie('chromeInstallLaunchMode', null);
-            $.cookie('chromeInstall', null);
-            RobloxLaunch._GoogleAnalyticsCallback = function() { var isInsideRobloxIDE = 'website'; if (Roblox && Roblox.Client && Roblox.Client.isIDE && Roblox.Client.isIDE()) { isInsideRobloxIDE = 'Studio'; };GoogleAnalyticsEvents.FireEvent(['Plugin Location', 'Launch Attempt', isInsideRobloxIDE]);GoogleAnalyticsEvents.FireEvent(['Plugin', 'Launch Attempt', 'Play']);EventTracker.fireEvent('GameLaunchAttempt_Win32', 'GameLaunchAttempt_Win32_Plugin'); if (typeof Roblox.GamePlayEvents != 'undefined') { Roblox.GamePlayEvents.SendClientStartAttempt(null, play_placeId); }  }; 
-            Roblox.Client.ResumeTimer(eval(continuation));
-        }
-        
-</script>
-
-
-<div class="ConfirmationModal modalPopup unifiedModal smallModal" data-modal-handle="confirmation" style="display:none;">
-    <a class="genericmodal-close ImageButton closeBtnCircle_20h"></a>
-    <div class="Title"></div>
-    <div class="GenericModalBody">
-        <div class="TopBody">
-            <div class="ImageContainer roblox-item-image" data-image-size="small" data-no-overlays data-no-click>
-                <img class="GenericModalImage" alt="generic image" />
-            </div>
-            <div class="Message"></div>
-        </div>
-        <div class="ConfirmationModalButtonContainer GenericModalButtonContainer">
-            <a href id="roblox-confirm-btn"><span></span></a>
-            <a href id="roblox-decline-btn"><span></span></a>
-        </div>
-        <div class="ConfirmationModalFooter">
-        
-        </div>  
-    </div>  
-    <script type="text/javascript">
-        Roblox = Roblox || {};
-        Roblox.Resources = Roblox.Resources || {};
-        
-        //<sl:translate>
-        Roblox.Resources.GenericConfirmation = {
-            yes: "Yes",
-            No: "No",
-            Confirm: "Confirm",
-            Cancel: "Cancel"
-        };
-        //</sl:translate>
-    </script>
-</div>
-
-
-
-
-<script type="text/javascript">
-    var Roblox = Roblox || {};
-    Roblox.jsConsoleEnabled = false;
-</script>
-
-
-
-    <script type="text/javascript">
-        $(function () {
-            Roblox.CookieUpgrader.domain = 'roblox.com';
-            Roblox.CookieUpgrader.upgrade("GuestData", { expires: Roblox.CookieUpgrader.thirtyYearsFromNow });
-            Roblox.CookieUpgrader.upgrade("RBXSource", { expires: function (cookie) { return Roblox.CookieUpgrader.getExpirationFromCookieValue("rbx_acquisition_time", cookie); } });
-            Roblox.CookieUpgrader.upgrade("RBXViralAcquisition", { expires: function (cookie) { return Roblox.CookieUpgrader.getExpirationFromCookieValue("time", cookie); } });
-                
-                Roblox.CookieUpgrader.upgrade("RBXMarketing", { expires: Roblox.CookieUpgrader.thirtyYearsFromNow });
-                
-                            
-                Roblox.CookieUpgrader.upgrade("RBXSessionTracker", { expires: Roblox.CookieUpgrader.fourHoursFromNow });
-                
-                    });
-    </script>
-
-
-    
-    <script type='text/javascript' src='http://js.rbxcdn.com/22f5b93b0e23b69d9c48f68ea3c65fe3.js.gzip'></script>
-
-
-    
-<script type='text/javascript' src='http://js.rbxcdn.com/6385cae49dc708a8f2f93167ad17466d.js.gzip'></script>
-    <script type='text/javascript' src='http://js.rbxcdn.com/59e30cf6dc89b69db06bd17fbf8ca97c.js.gzip'></script>
-    <script type='text/javascript' src='http://js.rbxcdn.com/f3251ed8271ce1271b831073a47b65e3.js.gzip'></script>
-    <script type='text/javascript' src='http://js.rbxcdn.com/045483c002abdefee9f2e9598ac48d08.js.gzip'></script>
-
-
-    
-    <script type='text/javascript'>Roblox.config.externalResources = [];Roblox.config.paths['Pages.Catalog'] = 'http://js.rbxcdn.com/c1d70e1b98c87fcdb85e894b5881f60c.js.gzip';Roblox.config.paths['Pages.CatalogShared'] = 'http://js.rbxcdn.com/bd76a582ffb966eb0af3f16d61defa7f.js.gzip';Roblox.config.paths['Pages.Messages'] = 'http://js.rbxcdn.com/b123274ceba7c65d8415d28132bb2220.js.gzip';Roblox.config.paths['Resources.Messages'] = 'http://js.rbxcdn.com/6307f9bd9c09fa9d88c76291f3b68fda.js.gzip';Roblox.config.paths['Widgets.AvatarImage'] = 'http://js.rbxcdn.com/64f4ed4d4cf1c0480690bc39cbb05b73.js.gzip';Roblox.config.paths['Widgets.DropdownMenu'] = 'http://js.rbxcdn.com/5cf0eb71249768c86649bbf0c98591b0.js.gzip';Roblox.config.paths['Widgets.GroupImage'] = 'http://js.rbxcdn.com/556af22c86bce192fb12defcd4d2121c.js.gzip';Roblox.config.paths['Widgets.HierarchicalDropdown'] = 'http://js.rbxcdn.com/7689b2fd3f7467640cda2d19e5968409.js.gzip';Roblox.config.paths['Widgets.ItemImage'] = 'http://js.rbxcdn.com/d689e41830fba6bc49155b15a6acd020.js.gzip';Roblox.config.paths['Widgets.PlaceImage'] = 'http://js.rbxcdn.com/45d46dd8e2bd7f10c17b42f76795150d.js.gzip';Roblox.config.paths['Widgets.SurveyModal'] = 'http://js.rbxcdn.com/56ad7af86ee4f8bc82af94269ed50148.js.gzip';</script>
-
-    
-    <script>
-        Roblox.XsrfToken.setToken('mecKQSJBjHD1');
-    </script>
-
-        <script>
-            $(function () {
-                Roblox.DeveloperConsoleWarning.showWarning();
-            });
-        </script>
-    <script type="text/javascript">
-    $(function () {
-        Roblox.JSErrorTracker.initialize({ 'suppressConsoleError': true});
-    });
-</script>
-    
-
-<script type="text/javascript">
-    $(function(){
-        function trackReturns() {
-            function dayDiff(d1, d2) {
-                return Math.floor((d1-d2)/86400000);
-            }
-            if (!localStorage) {
-                return false;
-            }
-
-            var cookieName = 'RBXReturn';
-            var cookieOptions = {expires:9001};
-            var cookieStr = localStorage.getItem(cookieName) || "";
-            var cookie = {};
-
-            try {
-                cookie = JSON.parse(cookieStr);
-            } catch (ex) {
-                // busted cookie string from old previous version of the code
-            }
-
-            try {
-                if (typeof cookie.ts === "undefined" || isNaN(new Date(cookie.ts))) {
-                    localStorage.setItem(cookieName, JSON.stringify({ ts: new Date().toDateString() }));
-                    return false;
-                }
-            } catch (ex) {
-                return false;
-            }
-
-            var daysSinceFirstVisit = dayDiff(new Date(), new Date(cookie.ts));
-            if (daysSinceFirstVisit == 1 && typeof cookie.odr === "undefined") {
-                RobloxEventManager.triggerEvent('rbx_evt_odr', {});
-                cookie.odr = 1;
-            }
-            if (daysSinceFirstVisit >= 1 && daysSinceFirstVisit <= 7 && typeof cookie.sdr === "undefined") {
-                RobloxEventManager.triggerEvent('rbx_evt_sdr', {});
-                cookie.sdr = 1;
-            }
-            try {
-                localStorage.setItem(cookieName, JSON.stringify(cookie));
-            } catch (ex) {
-                return false;
-            }
-        }
-
-        GoogleListener.init();
-
-
-    
-        RobloxEventManager.initialize(true);
-        RobloxEventManager.triggerEvent('rbx_evt_pageview');
-        trackReturns();
-        
-
-    
-        RobloxEventManager._idleInterval = 450000;
-        RobloxEventManager.registerCookieStoreEvent('rbx_evt_initial_install_start');
-        RobloxEventManager.registerCookieStoreEvent('rbx_evt_ftp');
-        RobloxEventManager.registerCookieStoreEvent('rbx_evt_initial_install_success');
-        RobloxEventManager.registerCookieStoreEvent('rbx_evt_fmp');
-        RobloxEventManager.startMonitor();
-        
-
-    });
-
-</script>
-
-
-    
-    
-
-<script type="text/javascript">
-    var Roblox = Roblox || {};
-    Roblox.UpsellAdModal = Roblox.UpsellAdModal || {};
-
-    Roblox.UpsellAdModal.Resources = {
-        //<sl:translate>
-        title: "Remove Ads Like This",
-        body: "Builders Club members do not see external ads like these.",
-        accept: "Upgrade Now",
-        decline: "No, thanks"
-        //</sl:translate>
-    };
-</script>
-
-    
-    <script type='text/javascript' src='http://js.rbxcdn.com/21c119fcb600df9fa46ea76dca4f1a19.js.gzip'></script>
-
-
-
-<div id="page-heartbeat-event-data-model"
-     class="hidden"
-     data-page-heartbeat-event-intervals="[2,8,20,60]">
-</div>        <script>
-        var _comscore = _comscore || [];
-        _comscore.push({ c1: "2", c2: "6035605", c3: "", c4: "", c15: "" });
-
-        (function() {
-            var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];
-            s.async = true;
-            s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
-            el.parentNode.insertBefore(s, el);
-        })();
-    </script>
-    <noscript>
-        <img src="http://b.scorecardresearch.com/p?c1=2&c2=&c3=&c4=&c5=&c6=&c15=&cv=2.0&cv=1"/>
-    </noscript>
-</body>
-</html>
+                <img src="http://images.rbxcdn.com/4bed93c91f909002b1f17f05c0ce13d1.gif" width="82" height
