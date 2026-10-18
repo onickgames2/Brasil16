@@ -1,15 +1,13 @@
 // Presença dos amigos (Brasil16): cinza = offline, azul = online, verde = jogando.
-// Precisa do auth.js carregado antes (usa `sb` e `Auth`) e do presence.sql rodado no Supabase.
-//
-// Para marcar "jogando", a página do jogo faz: Presence.setPlaying(true)
-// (ou define window.B16_PLAYING = true antes de carregar este arquivo).
+// Precisa do auth.js (usa `sb` e `Auth`) e do presence.sql rodado no Supabase.
+// Na página do jogo: Presence.setPlaying(true) (ou window.B16_PLAYING = true antes de carregar).
 (function () {
   "use strict";
 
-  var BEAT_MS = 60000;     // avisa que está online a cada 60s
-  var REFRESH_MS = 30000;  // atualiza o status dos amigos a cada 30s
+  var BEAT_MS = 60000;
+  var REFRESH_MS = 30000;
   var playing = !!window.B16_PLAYING;
-  var statusMap = {};      // { nome_minusculo: "offline" | "online" | "playing" }
+  var statusMap = {};
   var warnedBeat = false;
   var warnedList = false;
   var ultimoRefresh = 0;
@@ -27,7 +25,6 @@
     document.head.appendChild(s);
   }
 
-  // ---------- meu status ----------
   async function beat() {
     if (document.hidden) return;
     var r = await sb.rpc("set_presence", { p_playing: playing });
@@ -37,7 +34,6 @@
     }
   }
 
-  // ---------- status dos amigos ----------
   async function atualizar() {
     ultimoRefresh = Date.now();
     var r = await sb.rpc("get_friend_status");
@@ -79,11 +75,10 @@
       if (barra.className !== cls) barra.className = cls;
       barra.title = ROTULO[st] || "";
     }
-    // amigo novo na lista que ainda não veio no status: busca de novo (no máx. a cada 3s)
     if (faltando && Date.now() - ultimoRefresh > 3000) atualizar();
   }
 
-  // a lista é refeita pelo home-auth.js (a cada 20s e ao aceitar/remover amigos)
+  // o home-auth.js refaz a lista (a cada 20s e ao aceitar/remover amigos)
   function observarLista() {
     var ul = document.getElementById("friend-list");
     if (!ul) return;
@@ -91,7 +86,6 @@
     desenhar();
   }
 
-  // ---------- início ----------
   async function iniciar() {
     injetarCSS();
     observarLista();
