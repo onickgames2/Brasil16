@@ -13,26 +13,29 @@
 
 <style>
   @media (max-width: 767px) {
-  /* menu e logo lado a lado na mesma linha */
+  /* barra com altura fixa: linha 1 (menu, logo, ícones) + linha 2 (links) */
+  #header { height: 78px !important; }
+
+  #header .container-fluid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    padding: 0 !important;
+  }
+
+  /* linha 1, esquerda: menu + logo */
   .rbx-navbar-header {
+    order: 1;
     display: flex !important;
     align-items: center !important;
     gap: 12px !important;
     float: none !important;
     width: auto !important;
-    height: 48px !important;
-    padding-left: 10px !important;
+    height: 40px !important;
+    padding-left: 12px !important;
   }
-  .rbx-nav-collapse {
-    float: none !important;
-    margin: 0 !important;
-    position: relative !important;
-    flex: 0 0 auto !important;
-  }
-  .navbar-header {
-    float: none !important;
-    margin: 0 !important;
-  }
+  .rbx-nav-collapse { float: none !important; margin: 0 !important; position: relative !important; }
+  .navbar-header { float: none !important; margin: 0 !important; }
   .navbar-brand {
     display: flex !important;
     align-items: center !important;
@@ -41,12 +44,30 @@
     margin: 0 !important;
   }
 
-  /* garante espaço pros links Games/Catalog/Develop/ROBUX */
-  #header .rbx-navbar.hidden-md {
-    margin-top: 0 !important;
-    clear: both !important;
+  /* campo de busca escondido (como no seu exemplo) */
+  #navbar-universal-search { display: none !important; }
+
+  /* linha 1, direita: ícones */
+  .rbx-navbar-right {
+    order: 2;
+    float: none !important;
+    width: auto !important;
+    height: 40px !important;
+    margin-left: auto !important;
+    padding-right: 8px !important;
   }
+
+  /* linha 2: Games / Catalog / Develop / ROBUX */
+  #header ul.rbx-navbar.hidden-md {
+    order: 3;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    float: none !important;
+    clear: none !important;
+    height: 38px !important;
+    margin: 0 !important;
   }
+}
 	
  /* ícone das 3 barrinhas (botão que abre o menu) */
 .rbx-nav-collapse .rbx-icon-nav-menu,
