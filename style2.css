@@ -3,6 +3,22 @@
 @media (max-width: 768px) {
   html, body { overflow-x: hidden; }
 
+  /* header: só o ícone no celular */
+  .navbar-brand {
+    display: flex !important;
+    align-items: center !important;
+    height: 32px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .navbar-brand .icon-logo { display: none !important; }
+  .navbar-brand .icon-logo-r {
+    display: inline-block !important;
+    width: 32px !important;
+    height: 32px !important;
+    background: url("https://files.catbox.moe/08wel3.png") no-repeat center / contain !important;
+  }
+
   .body-width, #BodyWrapper, #RepositionBody, #MasterContainer {
     width: 100% !important;
     min-width: 0 !important;
