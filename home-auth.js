@@ -166,7 +166,10 @@
     var hello = $("home-username");
     if (hello) { hello.textContent = nome; hello.classList.remove("rbx-preload"); }
     var lead = $("left-username");
-    if (lead) lead.textContent = nome;
+if (lead) {
+  lead.textContent = nome;
+  lead.classList.remove("rbx-preload");
+}
 
     iniciarMenu();
 
