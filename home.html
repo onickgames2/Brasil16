@@ -12,7 +12,43 @@
 <script src="./icons.js"></script>
 
 <style>
-  /* ícone das 3 barrinhas (botão que abre o menu) */
+  @media (max-width: 767px) {
+  /* menu e logo lado a lado na mesma linha */
+  .rbx-navbar-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    float: none !important;
+    width: auto !important;
+    height: 48px !important;
+    padding-left: 10px !important;
+  }
+  .rbx-nav-collapse {
+    float: none !important;
+    margin: 0 !important;
+    position: relative !important;
+    flex: 0 0 auto !important;
+  }
+  .navbar-header {
+    float: none !important;
+    margin: 0 !important;
+  }
+  .navbar-brand {
+    display: flex !important;
+    align-items: center !important;
+    height: 32px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* garante espaço pros links Games/Catalog/Develop/ROBUX */
+  #header .rbx-navbar.hidden-md {
+    margin-top: 0 !important;
+    clear: both !important;
+  }
+  }
+	
+ /* ícone das 3 barrinhas (botão que abre o menu) */
 .rbx-nav-collapse .rbx-icon-nav-menu,
 .rbx-icon-nav-menu {
   display: inline-block !important;
@@ -37,7 +73,15 @@
     width: 32px !important;
     height: 32px !important;
     background: url("https://files.catbox.moe/08wel3.png") no-repeat center / contain !important;
-}
+  }
+	}
+
+  /* garante espaço pros links Games/Catalog/Develop/ROBUX */
+  #header .rbx-navbar.hidden-md {
+    margin-top: 0 !important;
+    clear: both !important;
+  }
+	}
 	
   /* pedidos de amizade */
   #friend-requests { margin-bottom: 15px; }
