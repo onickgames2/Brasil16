@@ -12,6 +12,24 @@
 <script src="./icons.js"></script>
 
 <style>
+  /* logo completa (desktop) */
+.navbar-brand .logo,
+.navbar-brand .logo-transitional {
+  display: inline-block !important;
+  width: 130px !important;
+  height: 32px !important;
+  background: url("https://files.catbox.moe/8e4d8m.png") no-repeat left center / contain !important;
+}
+
+/* ícone no lugar da logo (mobile) */
+@media (max-width: 767px) {
+  .navbar-brand .logo,
+  .navbar-brand .logo-transitional {
+    width: 32px !important;
+    height: 32px !important;
+    background: url("https://files.catbox.moe/08wel3.png") no-repeat center / contain !important;
+}
+	
   /* pedidos de amizade */
   #friend-requests { margin-bottom: 15px; }
   .request-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; flex-wrap: wrap; }
